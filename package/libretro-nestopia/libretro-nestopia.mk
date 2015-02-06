@@ -7,7 +7,7 @@ LIBRETRO_NESTOPIA_VERSION = master
 LIBRETRO_NESTOPIA_SITE = $(call github,libretro,nestopia,master)
 
 define LIBRETRO_NESTOPIA_BUILD_CMDS
-	CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" -C $(@D)/libretro/ platform="armv6-hardfloat"
+	CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" -C $(@D)/libretro/ platform="armv7-neon-hardfloat"
 endef
 
 define LIBRETRO_NESTOPIA_INSTALL_TARGET_CMDS

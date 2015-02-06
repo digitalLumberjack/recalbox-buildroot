@@ -7,7 +7,7 @@ LIBRETRO_GPSP_VERSION = master
 LIBRETRO_GPSP_SITE = $(call github,libretro,gpsp,master)
 
 define LIBRETRO_GPSP_BUILD_CMDS
-	CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" -C $(@D) platform="armv6-hardfloat"
+	CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" -C $(@D) platform="armv7-neon-hardfloat"
 endef
 
 define LIBRETRO_GPSP_INSTALL_TARGET_CMDS

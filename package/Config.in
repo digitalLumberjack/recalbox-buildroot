@@ -215,6 +215,7 @@ menu "Libretro Cores"
        source "package/libretro-fmsx/Config.in"
        source "package/libretro-gpsp/Config.in"
        source "package/libretro-4do/Config.in"
+       source "package/libretro-mupen64/Config.in"
 endmenu
 endif
 endmenu

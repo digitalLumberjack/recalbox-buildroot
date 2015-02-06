@@ -7,7 +7,7 @@ LIBRETRO_GENESISPLUSGX_VERSION = master
 LIBRETRO_GENESISPLUSGX_SITE = $(call github,libretro,Genesis-Plus-GX,master)
 
 define LIBRETRO_GENESISPLUSGX_BUILD_CMDS
-	CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" -C $(@D) -f Makefile.libretro platform="armv6-hardfloat"
+	CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" -C $(@D) -f Makefile.libretro platform="armv7-neon-hardfloat"
 endef
 
 define LIBRETRO_GENESISPLUSGX_INSTALL_TARGET_CMDS

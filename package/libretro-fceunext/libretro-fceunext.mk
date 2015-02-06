@@ -8,7 +8,7 @@ LIBRETRO_FCEUNEXT_SITE = $(call github,libretro,fceu-next,master)
 #		CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" 
 
 define LIBRETRO_FCEUNEXT_BUILD_CMDS
-	CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" -C $(@D)/fceumm-code -f Makefile.libretro platform=armv6-hardfloat
+	CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" -C $(@D)/fceumm-code -f Makefile.libretro platform="armv7-neon-hardfloat"
 endef
 
 define LIBRETRO_FCEUNEXT_INSTALL_TARGET_CMDS

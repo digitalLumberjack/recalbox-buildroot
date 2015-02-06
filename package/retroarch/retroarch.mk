@@ -7,7 +7,7 @@ RETROARCH_VERSION = 2755abc14fe25b9f32e145dcf6ec5c9569640eb8
 RETROARCH_SITE = https://github.com/libretro/RetroArch.git
 RETROARCH_SITE_METHOD = git
 RETROARCH_LICENSE = GPLv3+
-RETROARCH_CONF_OPTS += --disable-netplay --disable-oss --disable-bsv_movie
+RETROARCH_CONF_OPTS += --disable-netplay --disable-oss --disable-bsv_movie --enable-gles --enable-neon --enable-floathard
 RETROARCH_DEPENDENCIES = host-pkgconf
 
 ifeq ($(BR2_PACKAGE_SDL),y)
