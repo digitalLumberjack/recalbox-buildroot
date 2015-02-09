@@ -8,7 +8,7 @@ MK_ARCADE_JOYSTICK_RPI_SITE = $(call github,digitallumberjack,mk_arcade_joystick
 MK_ARCADE_JOYSTICK_RPI_DEPENDENCIES = linux
 
 define MK_ARCADE_JOYSTICK_RPI_BUILD_CMDS
-		$(MAKE) -C $(@D) -f Makefile.cross $(LINUX_MAKE_FLAGS) KERNELDIR=$(LINUX_DIR)
+		$(MAKE) -C $(@D) -f Makefile.cross $(LINUX_MAKE_FLAGS) KERNELDIR=$(LINUX_DIR) RPI2=1
 endef
 
 define MK_ARCADE_JOYSTICK_RPI_INSTALL_TARGET_CMDS

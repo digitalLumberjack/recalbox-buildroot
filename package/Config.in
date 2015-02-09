@@ -212,6 +212,7 @@ menu "Libretro Cores"
        source "package/libretro-gpsp/Config.in"
        source "package/libretro-4do/Config.in"
        source "package/libretro-mupen64/Config.in"
+       source "package/libretro-uae/Config.in"
 endmenu
 endif
 endmenu
