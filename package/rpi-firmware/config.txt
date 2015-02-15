@@ -18,8 +18,8 @@ hdmi_force_hotplug=0
 #sdtv_mode=2
 
 # Overclock
-
 gpu_mem=512
+
 avoid_safe_mode=1
 
 
