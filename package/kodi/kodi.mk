@@ -19,7 +19,7 @@ KODI_DEPENDENCIES = host-gawk host-gettext host-gperf host-infozip host-lzo \
 KODI_DEPENDENCIES += boost bzip2 expat ffmpeg fontconfig freetype jasper jpeg \
 	libass libcdio libcurl libfribidi libgcrypt libmad libmodplug libmpeg2 \
 	libogg libplist libpng libsamplerate libungif libvorbis libxml2 libxslt lzo ncurses \
-	openssl pcre python readline sqlite taglib tiff tinyxml yajl zlib
+	openssl pcre python readline sqlite taglib tiff tinyxml yajl zlib sdl2
 
 KODI_CONF_ENV = \
 	PYTHON_VERSION="$(PYTHON_VERSION_MAJOR)" \
@@ -43,14 +43,23 @@ KODI_CONF_OPTS +=  \
 	--disable-ssh \
 	--disable-vdpau \
 	--disable-vtbdecoder \
-	--enable-optimizations
+	--enable-optimizations \
+	--enable-sdl \
+	--enable-joystick
 
 ifeq ($(BR2_PACKAGE_RPI_USERLAND),y)
 KODI_DEPENDENCIES += rpi-userland
 KODI_CONF_OPTS += --with-platform=raspberry-pi --enable-player=omxplayer
+
+KODI_SDL_CONFIG=$(STAGING_DIR)/usr/bin/sdl2-config
+KODI_SDL_FLAGS=`$(KODI_SDL_CONFIG) --cflags`
+KODI_SDL_LIBS=`$(KODI_SDL_CONFIG) --libs`
+
 KODI_CONF_ENV += INCLUDES="-I$(STAGING_DIR)/usr/include/interface/vcos/pthreads \
 	-I$(STAGING_DIR)/usr/include/interface/vmcs_host/linux" \
-	LIBS="-lvcos -lvchostif"
+	LIBS="-lvcos -lvchostif $(KODI_SDL_LIBS)" \
+	SDL_LIBS="$(KODI_SDL_LIBS)" SDL_CFLAGS="$(KODI_SDL_FLAGS)" \
+	CFLAGS="$(KODI_SDL_FLAGS)" CXXFLAGS="$(KODI_SDL_FLAGS)"
 endif
 
 ifeq ($(BR2_PACKAGE_LIBCAP),y)
@@ -97,7 +106,7 @@ else
 KODI_CONF_OPTS += --disable-rsxs
 endif
 else
-KODI_CONF_OPTS += --disable-gl --disable-rsxs --disable-sdl --disable-x11 --disable-xrandr
+KODI_CONF_OPTS += --disable-gl --disable-rsxs --disable-x11 --disable-xrandr
 ifeq ($(BR2_PACKAGE_KODI_EGL_GLES),y)
 KODI_DEPENDENCIES += libegl libgles
 KODI_CONF_OPTS += --enable-gles
@@ -250,5 +259,29 @@ define KODI_INSTALL_INIT_SYSTEMD
 	ln -fs ../kodi.service \
 		$(TARGET_DIR)/etc/systemd/system/multi-user.target.wants/kodi.service
 endef
+
+
+define KODI_PRE_CONFIGURE_RPI2_HOOK
+	$(SED) "s/use_neon=no/use_neon=yes/g" $(@D)/configure
+    	$(SED) "s/use_cpu=arm1176jzf-s/use_cpu=cortex-a7/g" $(@D)/configure
+endef
+
+define KODI_PRE_CONFIGURE_JOYSTICK_HOOK
+	$(SED) "s/use_joystick=no/use_joystick=yes/g" $(@D)/configure
+endef
+
+define KODI_POST_CONFIGURE_SDL_HOOK
+	#$(SED) "s|/\* #undef HAVE_LIBSDL \*/|#define HAVE_LIBSDL 1|g" $(@D)/xbmc/config.h
+	#$(SED) "s|/\* #undef HAVE_SDL \*/|#define HAVE_SDL 1|g" $(@D)/xbmc/config.h
+	#$(SED) "s|/\* #undef SDL_VERSION \*/|#define SDL_VERSION 2|g" $(@D)/xbmc/config.h
+endef
+
+
+ifeq ($(BR2_cortex_a7),y)
+        KODI_PRE_CONFIGURE_HOOKS += KODI_PRE_CONFIGURE_RPI2_HOOK
+endif
+KODI_PRE_CONFIGURE_HOOKS += KODI_PRE_CONFIGURE_JOYSTICK_HOOK
+KODI_POST_CONFIGURE_HOOKS += KODI_POST_CONFIGURE_SDL_HOOK
+
 
 $(eval $(autotools-package))
