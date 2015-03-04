@@ -4,6 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 ### Changed
+- Added z64 extenson for n64
+- Added xbox360 wireless defaut configuration
+- Fixed : power management of ew-7811un
+- Added kodi mysql support
+
+
+## [3.2.5] - 2015-03-03
+### Changed
 - Added samba socket option for large files copy
 - Added db9 driver package
 - Added gamecon driver package
