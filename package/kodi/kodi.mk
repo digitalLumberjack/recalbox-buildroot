@@ -48,6 +48,14 @@ KODI_CONF_OPTS +=  \
 	--enable-sdl \
 	--enable-joystick
 
+ifeq ($(BR2_PACKAGE_MYSQL),y)
+KODI_CONF_OPTS += --enable-mysql
+KODI_CONF_ENV += ac_cv_path_MYSQL_CONFIG="$(STAGING_DIR)/usr/bin/mysql_config"
+KODI_DEPENDENCIES += mysql
+else
+KODI_CONF_OPTS += --disable-mysql
+endif
+
 ifeq ($(BR2_PACKAGE_RPI_USERLAND),y)
 KODI_DEPENDENCIES += rpi-userland
 KODI_CONF_OPTS += --with-platform=raspberry-pi --enable-player=omxplayer
@@ -61,6 +69,11 @@ KODI_CONF_ENV += INCLUDES="-I$(STAGING_DIR)/usr/include/interface/vcos/pthreads 
 	LIBS="-lvcos -lvchostif $(KODI_SDL_LIBS)" \
 	SDL_LIBS="$(KODI_SDL_LIBS)" SDL_CFLAGS="$(KODI_SDL_FLAGS)" \
 	CFLAGS="$(KODI_SDL_FLAGS)" CXXFLAGS="$(KODI_SDL_FLAGS)"
+endif
+
+ifeq ($(BR2_PACKAGE_LIBFSLVPUWRAP),y)
+KODI_DEPENDENCIES += libfslvpuwrap
+KODI_CONF_OPTS += --enable-codec=imxvpu
 endif
 
 ifeq ($(BR2_PACKAGE_LIBCAP),y)
