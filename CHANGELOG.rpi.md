@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+
+
+## [3.2.8] - 2015-03-09
 - Added switches in recalbox.conf
     - kodi x button switch
     - game resolution switch
@@ -20,6 +23,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Bumped to last userland and firmware
 - Kodi PVR support
 - Added cifs support
+- Added ipv6 support
+- Fixed : hats for specials key on retroarch
+
+## [3.2.7] - 2015-03-03
+- Fixed boot process
 
 ## [3.2.6] - 2015-03-03
 ### Changed
