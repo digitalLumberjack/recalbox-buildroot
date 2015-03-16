@@ -14,7 +14,7 @@ if [[ "$command" == "get" ]];then
 		exit 1
 	fi
 	if [[ "$csetting" != "" ]]; then
-		echo "`logtime` : systemsetting.sh - customsetting $argsetting found : $setting" >> $log
+		echo "`logtime` : systemsetting.sh - customsetting $argsetting found : $csetting" >> $log
 		echo $csetting
 		exit 0
 	else
