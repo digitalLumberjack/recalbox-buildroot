@@ -15,7 +15,7 @@ if [[ "$command" == "get" ]];then
 	        if [[ "$?" != "0" ]]; then
 	                exit 1
 	        fi
-	        if [[ "$setting" != ""]]; then
+	        if [[ "$setting" != "" ]]; then
 	               echo "`logtime` : systemsetting.sh - default $argsetting found : $setting" >> $log
 		       echo $setting
 		       exit 0
