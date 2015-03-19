@@ -208,6 +208,12 @@ function setRetroarchExtraConfigs {
 
 }
 
+function setRetroarchShaderConfigs {
+
+	
+	
+}
+
 function switchHotkeyiMame {
 
         uuid="$1"
