@@ -29,6 +29,7 @@ filenameNoExt="${filename%.*}"
 extension="${filename##*.}"
 
 systemsetting=/recalbox/scripts/systemsetting.sh
+retroarchsetting=/recalbox/scripts/retroarchsetting.sh
 
 
 echo $fullfilename
@@ -76,6 +77,13 @@ if [[ "$emulator" == "snes" ]]; then
 fi
 
 if [[ "$emulator" == "nes" ]]; then
+        nes_shader="`$systemsetting get nes_shader`"
+        if [[ $nes_shader ]]; then
+                unset_video_smooth="`$retroarchsetting set video_smooth false`"
+                set_nes_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$nes_shader`"
+                set_nes_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/$emulator/`"
+                set_nes_shader_enable="`$retroarchsetting set video_shader_enable true`"
+        fi
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/fceunext_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
 fi
 if [[ "$emulator" == "virtualboy" ]]; then
