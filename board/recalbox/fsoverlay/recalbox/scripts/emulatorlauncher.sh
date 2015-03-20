@@ -112,11 +112,27 @@ if [[ "$emulator" == "gba" ]]; then
 fi
 
 if [[ "$emulator" == "gbc" ]]; then
+        gbc_shader="`$systemsetting get gbc_shader`"
+        if [[ $gbc_shader ]]; then
+                unset_video_smooth="`$retroarchsetting set video_smooth false`"
+                set_gbc_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$gbc_shader`"
+                set_gbc_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/$emulator/`"
+                set_gbc_shader_enable="`$retroarchsetting set video_shader_enable true`"
+        else
+                unset_gbc_shader="`$retroarchsetting set video_shader ' '`"
+                unset_gbc_shader_dir="`$retroarchsetting set video_shader_dir ' '`"
+                unset_gbc_shader_enable="`$retroarchsetting set video_shader_enable false`"
+        fi
+
+	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/gambatte_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
+fi
+
+if [[ "$emulator" == "gb" ]]; then
         gb_shader="`$systemsetting get gb_shader`"
         if [[ $gb_shader ]]; then
                 unset_video_smooth="`$retroarchsetting set video_smooth false`"
-                set_gb_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/gb/$nes_shader`"
-                set_gb_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/gb/`"
+                set_gb_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$gb_shader`"
+                set_gb_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/$emulator/`"
                 set_gb_shader_enable="`$retroarchsetting set video_shader_enable true`"
         else
                 unset_gb_shader="`$retroarchsetting set video_shader ' '`"
