@@ -209,10 +209,13 @@ function setRetroarchExtraConfigs {
 }
 
 function setRetroarchShaderConfigs {
-
-	
-	
+        echo " " >> "$retroarch_config"
+        echo "#Shader Configuration" >> "$retroarch_config"
+        echo "video_shader_dir  = " >> "$retroarch_config"
+        echo "video_shader = " >> "$retroarch_config"
+        echo "video_shader_enable = false" >> $retroarch_config"
 }
+
 
 function switchHotkeyiMame {
 
