@@ -75,6 +75,7 @@ if [[ "$emulator" == "psx" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -100,6 +101,7 @@ if [[ "$emulator" == "snes" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -109,6 +111,9 @@ if [[ "$emulator" == "snes" ]]; then
                         fi
                 fi
         else
+                        unset_shader="`$retroarchsetting set video_shader ' '`"
+                        unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
+        fi
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
         fi
@@ -124,7 +129,7 @@ if [[ "$emulator" == "snes" ]]; then
 fi
 
 if [[ "$emulator" == "nes" ]]; then
-        shader="`$systemsetting get ${emulator}_shader`"
+         shader="`$systemsetting get ${emulator}_shader`"
         set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/$emulator/`"
         if [[ $enable_shader = "true" ]]; then
 		unset_video_smooth="`$retroarchsetting set video_smooth false`"
@@ -132,6 +137,7 @@ if [[ "$emulator" == "nes" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -157,6 +163,7 @@ if [[ "$emulator" == "virtualboy" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -168,7 +175,7 @@ if [[ "$emulator" == "virtualboy" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
+        fi 
 
 
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/vb_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
@@ -186,6 +193,7 @@ if [[ "$emulator" == "mastersystem" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -197,7 +205,7 @@ if [[ "$emulator" == "mastersystem" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
+        fi 
 
 
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/picodrive_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
@@ -216,6 +224,7 @@ if [[ "$emulator" == "gba" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -227,7 +236,7 @@ if [[ "$emulator" == "gba" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
+        fi 
 
         
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/gpsp_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
@@ -243,6 +252,7 @@ if [[ "$emulator" == "gbc" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -254,8 +264,8 @@ if [[ "$emulator" == "gbc" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
-
+        fi 
+        
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/gambatte_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
 fi
 
@@ -268,6 +278,7 @@ if [[ "$emulator" == "gb" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -279,9 +290,8 @@ if [[ "$emulator" == "gb" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
-
-
+        fi 
+        
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/gambatte_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
 fi
 
@@ -294,6 +304,7 @@ if [[ "$emulator" == "fds" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -305,7 +316,7 @@ if [[ "$emulator" == "fds" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
+        fi 
 
         
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/nestopia_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
@@ -320,6 +331,7 @@ if [[ "$emulator" == "megadrive" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -331,8 +343,8 @@ if [[ "$emulator" == "megadrive" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
-
+        fi 
+        
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/picodrive_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
 fi
 
@@ -345,6 +357,7 @@ if [[ "$emulator" == "gamegear" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -356,7 +369,7 @@ if [[ "$emulator" == "gamegear" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
+        fi 
 
         
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/genesisplusgx_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
@@ -371,6 +384,7 @@ if [[ "$emulator" == "segacd" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -382,9 +396,7 @@ if [[ "$emulator" == "segacd" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
-
-
+        fi 
         
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/picodrive_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
 fi
@@ -398,6 +410,7 @@ if [[ "$emulator" == "sega32x" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -409,7 +422,7 @@ if [[ "$emulator" == "sega32x" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
+        fi 
 
 
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/picodrive_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
@@ -424,6 +437,7 @@ if [[ "$emulator" == "atari2600" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -435,8 +449,7 @@ if [[ "$emulator" == "atari2600" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
-
+        fi 
         
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/stella_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
 fi
@@ -450,6 +463,7 @@ if [[ "$emulator" == "pcengine" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -461,9 +475,8 @@ if [[ "$emulator" == "pcengine" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
-
-
+        fi 
+        
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/pce_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
 fi
 
@@ -477,6 +490,7 @@ if [[ "$emulator" == "msx" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -488,7 +502,7 @@ if [[ "$emulator" == "msx" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
+        fi 
 
 
         if [[ "$extension" == "mx1" ]] ||  [[ "$extension" == "MX1" ]] ; then
@@ -509,6 +523,7 @@ if [[ "$emulator" == "imame" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -520,8 +535,7 @@ if [[ "$emulator" == "imame" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
-
+        fi 
 
 	if [[ -n ${ratiomap[$filename]} ]]; then
         	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/imame4all_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg --appendconfig /recalbox/configs/retroarch/${ratiomap[$filename]}.cfg \"$1\""
@@ -554,6 +568,7 @@ if [[ "$emulator" == "fbalibretro" ]]; then
                         set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/$emulator/$shader`"
                         set_shader_enable="`$retroarchsetting set video_shader_enable true`"
                 else
+                	set_shader_dir="`$retroarchsetting set video_shader_dir /recalbox/share/shaders/_presets/`"
                         if [[ -f "/recalbox/share/shaders/_presets/${emulator}_default.glslp" ]]; then
 				set_shader="`$retroarchsetting set video_shader /recalbox/share/shaders/_presets/${emulator}_default.glslp`"
                         	set_shader_enable="`$retroarchsetting set video_shader_enable true`"
@@ -565,8 +580,7 @@ if [[ "$emulator" == "fbalibretro" ]]; then
         else
                         unset_shader="`$retroarchsetting set video_shader ' '`"
                         unset_shader_enable="`$retroarchsetting set video_shader_enable false`"
-        fi
-
+        fi 
 
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/fba_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
 fi
