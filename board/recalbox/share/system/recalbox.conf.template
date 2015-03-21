@@ -93,3 +93,11 @@
 ## If two emulators are available for a platform you can switch here
 ## SNES : use pocketsnes (recommended for rpi1), catsfc or snes9x
 ;snes_emulator=pocketsnes
+
+
+# ------------ S - SHADERS ----------- #
+## If you dont like the preset Shader you can overwrite it here.
+## <emulator>_shader=shaderpresetfile.glslp
+## nes_shader=phosphor.glslp
+gb_shader=dot-green.glslp
+gbc_shader=dot.glslp

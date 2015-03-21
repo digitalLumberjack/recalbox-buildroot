@@ -19,7 +19,10 @@ rewind_granularity = 2
 
 video_gpu_screenshot = true
 
+video_shader =
+video_shader_dir =
 video_shader_enable = false
+
 video_smooth = true
 
 screenshot_directory = /recalbox/share/screenshots/

@@ -18,5 +18,9 @@ if [[ "$command" == "get" ]];then
 		exit 0
 	fi
 fi
+if [[ "$command" == "set" ]];then 
+        echo "`logtime` : systemsetting.sh - setting $varname to $newval" >> $log
+	sed -i "s|^${argsetting}=\".*\"|^${argsetting}=\"${newval}\"|g" $system_settings
+fi
 exit 1
 
