@@ -1,3 +1,5 @@
+/board/recalbox/share/roms/limelight/jar/*
+/board/recalbox/share/roms/limelight/java/*
 /output
 /dl
 /.auto.deps
