@@ -3,6 +3,19 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+- Added Wonderswan Color libretro emulator
+- Added Lutro libretro core (LUA framework)
+- Added NeoGeo as a separated system
+- Added NeoGeo Pocket Color libretro emulator
+- Added Vectrex libretro emulator
+- Added Game And Watch libretro emulator
+- Added Lynx libretro emulator
+- Added PRBoom libretro 
+- modif zoid theme
+- patched kernel to support retrobit controllers
+- patched kernel to support 4NES4SNES controllers
+- patched kernel to fix the blinking xbox led. Only on rpi2
+- added gpu_mem for 256mo rpi1
 
 ## [3.2.11] - 2015-03-24
 - Corrected issues with controllers with idientical names

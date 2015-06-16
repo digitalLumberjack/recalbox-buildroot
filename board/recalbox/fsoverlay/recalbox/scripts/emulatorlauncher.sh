@@ -142,6 +142,14 @@ if [[ "$emulator" == "lynx" ]]; then
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/mednafen_lynx_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
 fi
 
+if [[ "$emulator" == "lutro" ]]; then
+	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/lutro_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
+fi
+
+if [[ "$emulator" == "wswan" ]]; then
+	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/mednafen_wswan_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
+fi
+
 if [[ "$emulator" == "atari2600" ]]; then
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/stella_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
 fi
@@ -160,6 +168,28 @@ if [[ "$emulator" == "msx" ]]; then
         /recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/fmsx_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
 fi
 
+if [[ "$emulator" == "neogeo" ]]; then
+        settings_neogeo="`$systemsetting get neogeo_emulator`"
+        if [[ "$settings_neogeo" == "fbalibretro" ]];then
+                /recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/fba_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
+        elif [[ "$settings_neogeo" == "imame" ]];then
+                /recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/imame4all_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
+        else
+                runsix=0
+                for game in ${sixBTNgames[*]}; do
+                        echo "checking if $filename is like $game "
+                        if [[ "$filename" =~ ^$game.* ]]; then
+                                runsix=1
+                                break
+                        fi
+                done
+                if [[ "$runsix" == "1" ]]; then
+                        /recalbox/scripts/runcommand.sh 4 "fba2x --configfile /recalbox/configs/fba/fba2x6btn.cfg \"$1\""
+                else
+                        /recalbox/scripts/runcommand.sh 4 "fba2x --configfile /recalbox/configs/fba/fba2x.cfg \"$1\""
+                fi
+        fi
+fi
 
 if [[ "$emulator" == "imame" ]]; then
 	if [[ -n ${ratiomap[$filename]} ]]; then
