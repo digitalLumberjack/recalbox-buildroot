@@ -100,6 +100,7 @@ fi
 
 if [[ "$emulator" == "gbc" ]]; then
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/gambatte_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
+#	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/tgbdual_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
 fi
 
 if [[ "$emulator" == "fds" ]]; then
