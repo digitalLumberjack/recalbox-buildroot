@@ -26,3 +26,4 @@ avoid_safe_mode=1
 
 
 kernel=zImage
+
