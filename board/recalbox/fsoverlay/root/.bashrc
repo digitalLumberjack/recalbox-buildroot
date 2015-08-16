@@ -1,0 +1,5 @@
+alias recalbox.conf='nano /recalbox/share/system/recalbox.conf'
+alias config.txt='nano /boot/config.txt'
+alias emulatorlauncher='nano /recalbox/scripts/emulatorlauncher.sh'
+alias es_settings.cfg='nano ~/.emulationstation/es_settings.cfg'
+alias es_systems.cfg='nano ~/.emulationstation/es_systems.cfg'
