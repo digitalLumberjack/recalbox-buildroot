@@ -17,8 +17,8 @@ case $1 in
         cmd="moonlight pair -keydir ${moonlight_keydir} -config ${moonlight_conf}" ;;
 
     *)
-        cmd="moonlight stream -remote -keydir ${moonlight_keydir} -mapping ${moonlight_mapping} -config ${moonlight_conf} > ${moonlight_log}" ;;
+        cmd="moonlight stream -keydir ${moonlight_keydir} -mapping ${moonlight_mapping} -config ${moonlight_conf} > ${moonlight_log}" ;;
 
 esac
 
-exec $cmd > /dev/null 2>&1
+exec $cmd
