@@ -1,8 +1,11 @@
 #!/bin/bash
 
+# More options available here: https://github.com/irtimmer/moonlight-embedded/tree/master/docs
 cd /recalbox/share/roms/moonlight/
 moonlight_dir=$PWD
 moonlight_ip=YOUR_IP_HERE
+moonlight_screen="720"
+moonlight_fps="60fps"
 moonlight_mapping="$moonlight_dir/mapping.conf"
 moonlight_keydir="$moonlight_dir/keydir"
 moonlight_output="/dev/null 2>&1"
@@ -20,7 +23,7 @@ case $1 in
         cmd="moonlight pair -keydir ${moonlight_keydir} ${moonlight_ip}" ;;
 
     *)
-        cmd="moonlight stream -remote -keydir ${moonlight_keydir} -mapping ${moonlight_mapping} ${moonlight_ip}" ;;
+        cmd="moonlight stream -remote -keydir ${moonlight_keydir} -${moonlight_screen} -${moonlight_fps} -mapping ${moonlight_mapping} ${moonlight_ip}" ;;
 
 esac
 
