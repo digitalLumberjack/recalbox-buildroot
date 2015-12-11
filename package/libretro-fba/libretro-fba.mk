@@ -3,7 +3,7 @@
 # FBA
 #
 ################################################################################
-LIBRETRO_FBA_VERSION = 0093227f57ec5045daa309eaeba007366460181a
+LIBRETRO_FBA_VERSION = 314111bdc01da6fc46e3ef80888ddf6a829ee7a7
 LIBRETRO_FBA_SITE = $(call github,libretro,libretro-fba,$(LIBRETRO_FBA_VERSION))
 
 ifeq ($(BR2_cortex_a7),y)

@@ -11,6 +11,20 @@ extra1="$3"
 extra2="$4"
 version=`cat /recalbox/recalbox.arch`
 
+waitWifi() {
+  DEVICE=$1
+  TIMEOUT=$2
+
+  N=0
+  while test $N -lt $TIMEOUT
+  do
+    wpa_cli -i"$DEVICE" status | grep -qE '^wpa_state=COMPLETED$' && return 0
+    sleep 1
+    let N++
+  done
+  return 1
+}
+
 log=/root/recalbox.log
 wpafile=/etc/wpa_supplicant/wpa_supplicant.conf
 systemsetting="python /usr/lib/python2.7/site-packages/configgen/settings/recalboxSettings.pyc"
@@ -197,7 +211,7 @@ fi
 
 
 if [ "$command" == "canupdate" ];then
-	available=`wget -qO- http://archive2.recalbox.com/recalbox-$version/root/recalbox/recalbox.version`
+	available=`wget -qO- http://archive2.recalbox.com/rsync/recalbox-$version/root/recalbox/recalbox.version`
 	if [[ "$?" != "0" ]];then
 		exit 2
 	fi
@@ -283,13 +297,43 @@ if [[ "$command" == "wifi" ]]; then
                 killall wpa_supplicant >> $log
                 /sbin/ifdown $wlan >> $log
                 /usr/sbin/wpa_supplicant -i$wlan -c/etc/wpa_supplicant/wpa_supplicant.conf &
-                sleep 4
+                waitWifi $wlan 20
                 /sbin/ifup $wlan >> $log
                 ifconfig $wlan | grep "inet addr" >> $log
                 exit $?
         fi
 fi
+if [[ "$command" == "hcitoolscan" ]]; then
+	killall hidd >> /dev/null
+	killall hcitool >> /dev/null
+	hcitool scan | tail -n +2
+	exit 0
+fi
 
+if [[ "$command" == "hiddpair" ]]; then
+	name="$extra1"
+	mac1="$mode"
+	mac=`echo $mac1 | grep -oEi "([0-9A-F]{2}[:-]){5}([0-9A-F]{2})" | tr '[:upper:]' '[:lower:]'`
+	if [ "$?" != "0" ]; then 
+		exit 1
+	fi
+	echo "pairing $name $mac" >>  $log
+	echo $name | grep "8Bitdo\|other" >> $log
+	if [ "$?" == "0" ]; then
+		echo "8Bitdo detected" >> $log
+		cat /etc/udev/rules.d/99-8bitdo.rules | grep "$mac" >> /dev/null
+		if [ "$?" != "0" ]; then
+			echo "adding rule for $mac" >> $log
+			echo "SUBSYSTEM==\"input\", ATTRS{uniq}==\"$mac\", MODE=\"0666\", ENV{ID_INPUT_JOYSTICK}=\"1\"" >> /etc/udev/rules.d/99-8bitdo.rules
+			killall udevd
+			/etc/init.d/S10udev start
+		fi
+	fi
+	
+	hidd --connect $mac 
+        exit $?
+fi
 
 exit 10
+
 

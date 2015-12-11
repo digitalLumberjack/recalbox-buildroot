@@ -15,7 +15,7 @@ KODI_INSTALL_STAGING = YES
 # GUI and pack them in a blob.
 # http://wiki.xbmc.org/index.php?title=TexturePacker
 KODI_DEPENDENCIES = host-gawk host-gettext host-gperf host-infozip host-lzo \
-	host-nasm host-sdl_image host-swig
+	host-nasm host-sdl_image host-swig sdl2
 KODI_DEPENDENCIES += boost bzip2 expat ffmpeg fontconfig freetype jasper jpeg \
 	libass libcdio libcurl libfribidi libgcrypt libmad libmodplug libmpeg2 \
 	libogg libplist libpng libsamplerate libvorbis libxml2 libxslt lzo ncurses \
@@ -35,7 +35,7 @@ KODI_CONF_OPTS +=  \
 	--with-ffmpeg=shared \
 	--disable-crystalhd \
 	--disable-hal \
-	--disable-joystick \
+	--enable-joystick \
 	--disable-openmax \
 	--disable-projectm \
 	--disable-pulse \
@@ -109,7 +109,7 @@ else
 KODI_CONF_OPTS += --disable-rsxs
 endif
 else
-KODI_CONF_OPTS += --disable-gl --disable-rsxs --disable-sdl --disable-x11 --disable-xrandr
+KODI_CONF_OPTS += --disable-gl --disable-rsxs --disable-x11 --disable-xrandr
 ifeq ($(BR2_PACKAGE_KODI_EGL_GLES),y)
 KODI_DEPENDENCIES += libegl libgles
 KODI_CONF_ENV += CXXFLAGS="$(TARGET_CXXFLAGS) `$(PKG_CONFIG_HOST_BINARY) --cflags egl`"

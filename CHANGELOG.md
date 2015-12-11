@@ -3,6 +3,100 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+- New version of xboxdrv
+- Corrected 8bitdo mapping
+
+## [3.3.0-beta16] - 2015-11-24
+- Corrected kodi start
+- Bumped to moonlight-embedded-2.1.2
+
+## [3.3.0-beta15] - 2015-11-22
+- Corrected sound issues with IREM games on libretro-mame2003 core
+- Updated libretro-fba core from FBA 0.2.97.36 to FBA 0.2.97.37
+- Added recalbox api
+- Added Chinese and Turkish
+- Added samba switch in recalbox.conf
+- Added WiiMote support
+- Added Kodi controller support 
+- Corrected controller <-> player attribution
+- Added moonlight system support, with roms
+- Added new switch in recalbox.conf for ssh and virtual gamepads
+
+## [3.3.0-beta14] - 2015-11-01
+- Corrected recalbox manager
+
+## [3.3.0-beta13] - 2015-11-01
+- Added recalbox-manager
+- Added custom ratio support
+
+## [3.3.0-beta12] - 2015-10-31
+- Added EmulationStation shutdown screen
+- Corrected select to quit shortcut
+
+## [3.3.0-beta11] - 2015-10-31
+- Corrected shadersets bug
+
+## [3.3.0-beta10] - 2015-10-31
+- Added GLideN64 video plugin
+- Added mame2003 libretro as default mame emulator
+- Added system.emulators.specialkeys to select the emulators special keys functions
+- Updated snes9x core (fix the bomberman 5 freeze)
+- Added Saitek controllers support
+- Added select shortcut in menu for quick restart / shutdown
+- Added Basque language
+
+## [3.3.0-beta9] - 2015-10-11
+- Fixed Moonlight theme for zoid
+- Added splashscreen for long reboots
+- Added mplayer and jscal 
+- Updated atari 2600 stella core for 2 players support
+- Updated fba libretro for R3 diag menu
+- Added xbox 360 official wireless dongle support OOTB
+- Added fullscreen/ratio/widescreen hack settings for n64
+
+## [3.3.0-beta8] - 2015-10-06
+- Removed avahi daemon
+- Fixed Moonlight theme
+
+## [3.3.0-beta7] - 2015-09-20
+- Updated themes + added moonlight themes
+- Updated .dat and infos about fba_libretro romset
+- Updated recalbox.conf with list of cores not supporting rewind
+- Added system.es.menu option
+- Added Moonlight
+- Added kodi webserver on port 8081
+- Added auto-connection for bluetooth controllers
+
+## [3.3.0-beta6] - 2015-09-15
+- More 8bitdo support
+- Corrected retro shaderset for mastersystem
+- Corrected kodi autostart
+
+## [3.3.0-beta5] - 2015-09-13
+- Added scanlines and retro shadersets
+- Added name based sdl2 driver switch (8bitdo support)
+- Added cavestory support
+- Added mad and vorbis support in scummvm
+- Refactored ES recalbox.conf management
+
+## [3.3.0-beta4] - 2015-09-05
+- Corrected start kodi with X
+- Added NES30 Pro Support
+- Added SFC30 Support
+- Ignore cheats for updates
+
+## [3.3.0-beta3] - 2015-08-29
+- Added xiaomi bluetooth controller config
+- Added default videomode that doesn't change the resolution while launching games
+- Added 16/10 support and 16/10 is set as default for wswan
+- Added recalbox version of Virtual Gamepad
+- Added retroarch input driver autoconfig based on guid
+- Added doom 1 shareware
+
+## [3.3.0-beta2] - 2015-08-23
+- Changed update repo and system
+
+## [3.3.0-beta1] - 2015-08-22
 - Added Wonderswan Color libretro emulator
 - Added Lutro libretro core (LUA framework)
 - Added NeoGeo as a separated system
@@ -32,6 +126,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Changed bash as default shell
 - Corrected update system
 - Added Tgbdual libretro core
+- Added Miroof's Virtual Gamepads
+- Added silent install
  
 ## [3.2.11] - 2015-03-24
 - Corrected issues with controllers with idientical names
