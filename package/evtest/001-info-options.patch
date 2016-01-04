@@ -1,0 +1,52 @@
+diff --git a/evtest.c b/evtest.c
+index f4b9897..ae5ec09 100644
+--- a/evtest.c
++++ b/evtest.c
+@@ -85,6 +85,7 @@
+ enum evtest_mode {
+ 	MODE_CAPTURE,
+ 	MODE_QUERY,
++	MODE_INFO,
+ 	MODE_VERSION,
+ };
+ 
+@@ -943,7 +944,7 @@ static int test_grab(int fd)
+  * @param device The device to monitor, or NULL if the user should be prompted.
+  * @return 0 on success, non-zero on error.
+  */
+-static int do_capture(const char *device)
++static int do_capture(const char *device, int loop)
+ {
+ 	int fd;
+ 	char *filename = NULL;
+@@ -997,7 +998,10 @@ static int do_capture(const char *device)
+ 
+ 	free(filename);
+ 
+-	return print_events(fd);
++	if(loop == 1) {
++	  return print_events(fd);
++	}
++	return EXIT_SUCCESS;
+ 
+ error:
+ 	free(filename);
+@@ -1078,6 +1082,7 @@ static int do_query(const char *device, const char *event_type, const char *keyn
+ 
+ static const struct option long_options[] = {
+ 	{ "query", no_argument, NULL, MODE_QUERY },
++	{ "info", no_argument, NULL, MODE_INFO },
+ 	{ "version", no_argument, NULL, MODE_VERSION },
+ 	{ 0, },
+ };
+@@ -1109,7 +1114,9 @@ int main (int argc, char **argv)
+ 		device = argv[optind++];
+ 
+ 	if (mode == MODE_CAPTURE)
+-		return do_capture(device);
++	  return do_capture(device, 1);
++	if (mode == MODE_INFO)
++	  return do_capture(device, 0);
+ 
+ 	if ((argc - optind) < 2) {
+ 		fprintf(stderr, "Query mode requires device, type and key parameters\n");
