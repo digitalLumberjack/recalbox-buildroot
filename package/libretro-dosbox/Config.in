@@ -1,0 +1,18 @@
+config BR2_PACKAGE_LIBRETRO_DOSBOX
+        bool "libretro-dosbox"
+	depends on BR2_PACKAGE_RETROARCH
+	depends on BR2_PACKAGE_SDL
+	depends on BR2_PACKAGE_SDL_GFX
+	depends on BR2_PACKAGE_SDL_IMAGE
+	depends on BR2_PACKAGE_SDL_MIXER
+	depends on BR2_PACKAGE_SDL_NET
+	depends on BR2_PACKAGE_SDL_SOUND
+	depends on BR2_PACKAGE_SDL_TTF
+	depends on BR2_PACKAGE_LIBPNG
+	depends on BR2_PACKAGE_LIBASOUND
+        help
+          A libretro dosbox core for ARM.
+
+	  http://www.libretro.com
+
+comment "LIBRETRO_DOSBOX needs a toolchain w/ C++"
