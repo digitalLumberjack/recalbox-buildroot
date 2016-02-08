@@ -1,0 +1,10 @@
+## RECALBOX - SYSTEM DOSBOX ##
+
+Placez ici vos roms dosbox.
+
+Les roms doivent avoir l'extension ".exe"
+
+Vous pouvez télécharger les executables dosbox à l'adresse :
+http://www.emuparadise.me/Abandonware_Games/51
+
+
