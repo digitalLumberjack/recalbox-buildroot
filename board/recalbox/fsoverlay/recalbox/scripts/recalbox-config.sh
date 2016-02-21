@@ -11,6 +11,8 @@ extra1="$3"
 extra2="$4"
 version=`cat /recalbox/recalbox.arch`
 
+recalboxupdateurl="http://archive.recalbox.com/4"
+
 preBootConfig() {
     mount -o remount,rw /boot
 }
@@ -261,9 +263,8 @@ if [ "$command" == "module" ];then
 	exit 0
 fi
 
-
 if [ "$command" == "canupdate" ];then
-	available=`wget -qO- http://archive2.recalbox.com/4.0.0/last/$version/recalbox.version`
+	available=`wget -qO- ${recalboxupdateurl}/$version/last/recalbox.version`
 	if [[ "$?" != "0" ]];then
 		exit 2
 	fi
@@ -404,11 +405,15 @@ if [[ "$command" == "hiddpair" ]]; then
         exit $connected
 fi
 
+storageFile="/boot/recalbox-boot.conf"
+
 if [[ "$command" == "storage" ]]; then
     if [[ "$mode" == "current" ]]; then
-	if test -e /boot/recalbox.conf
+	if test -e $storageFile
 	then
-	    cat /boot/recalbox.conf
+            SHAREDEVICE=`cat ${storageFile} | grep "sharedevice=" | head -n1 | cut -d'=' -f2`
+            [[ "$?" -ne "0" || "$SHAREDEVICE" == "" ]] && SHAREDEVICE=INTERNAL
+	    echo "$SHAREDEVICE"
 	else
 	    echo "INTERNAL"
 	fi
@@ -426,10 +431,18 @@ if [[ "$command" == "storage" ]]; then
     if [[ "$mode" == "INTERNAL" || "$mode" == "ANYEXTERNAL" || "$mode" == "RAM" || "$mode" == "DEV" ]]; then
 	preBootConfig
 	if [[ "$mode" == "INTERNAL" || "$mode" == "ANYEXTERNAL" || "$mode" == "RAM" ]]; then
-	    echo "$mode" > /boot/recalbox.conf
+            if [ `grep sharedevice $storageFile` ]; then
+               sed -i "s|sharedevice=.*|sharedevice=$mode|g" $storageFile
+            else
+               echo "sharedevice=$mode" >> $storageFile
+            fi
 	fi
 	if [[ "$mode" == "DEV" ]]; then
-            echo "$mode $extra1"  > /boot/recalbox.conf 
+            if [ `grep sharedevice $storageFile` ]; then
+               sed -i "s|sharedevice=.*|sharedevice=$mode $extra1|g" $storageFile
+            else
+               echo "sharedevice=$mode $extra1" >> $storageFile
+            fi
 	fi
 	postBootConfig
 	exit 0
