@@ -1,0 +1,6 @@
+## RECALBOX - Dinothawr ##
+
+Placez ici vos fichiers assets.
+
+Vous pouvez télécharger le reste nécessaire au jeu à l'adresse suivante :
+http://themaister.net/dinothawr/dinothawr-data.zip
