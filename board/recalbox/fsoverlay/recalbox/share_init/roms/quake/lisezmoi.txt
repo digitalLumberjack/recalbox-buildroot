@@ -1,0 +1,6 @@
+## RECALBOX - SYSTEM Quake 1  ##
+
+Placez ici vos wad quake.
+
+Les roms doivent avoir l'extension ".pak" 
+Le pak0.pak de la version shareware est nécessaire pour la version officiel du jeu pak1.pak.
