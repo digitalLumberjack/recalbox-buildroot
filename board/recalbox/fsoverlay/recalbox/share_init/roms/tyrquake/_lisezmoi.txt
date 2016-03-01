@@ -1,0 +1,6 @@
+## RECALBOX - SYSTEM Quake 1  ##
+
+Placez ici vos wad quake.
+
+Les roms doivent avoir l'extension ".pak" 
+

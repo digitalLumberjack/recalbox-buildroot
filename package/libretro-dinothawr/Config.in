@@ -1,0 +1,9 @@
+config BR2_PACKAGE_LIBRETRO_DINOTHAWR
+        bool "libretro-dinothawr"
+	depends on BR2_PACKAGE_RETROARCH
+        help
+          A libretro dinothawr core for ARM.
+
+	  http://www.libretro.com
+
+comment "LIBRETRO_DINOTHAWR needs a toolchain w/ C++"
