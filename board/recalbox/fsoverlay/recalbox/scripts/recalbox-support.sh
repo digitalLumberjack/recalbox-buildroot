@@ -39,14 +39,16 @@ fi
 
 # SYSTEM
 DSYSTEM="$TMPDIR""/system"
-dmesg 	         > "$DSYSTEM""/dmesg.txt"
-lsmod 	         > "$DSYSTEM""/lsmod.txt"
-ps    	         > "$DSYSTEM""/ps.txt"
-df -h 	         > "$DSYSTEM""/df.txt"
-netstat -tuan    > "$DSYSTEM""/netstat.txt"
-lsusb -v         > "$DSYSTEM""/lsusb.txt" 2>/dev/null
-tvservice -m CEA > "$DSYSTEM""/tvservice-CEA.txt"
-tvservice -m DMT > "$DSYSTEM""/tvservice-DMT.txt"
+dmesg 	                    > "$DSYSTEM""/dmesg.txt"
+lsmod 	                    > "$DSYSTEM""/lsmod.txt"
+ps    	                    > "$DSYSTEM""/ps.txt"
+df -h 	                    > "$DSYSTEM""/df.txt"
+netstat -tuan               > "$DSYSTEM""/netstat.txt"
+lsusb -v                    > "$DSYSTEM""/lsusb.txt" 2>/dev/null
+tvservice -m CEA            > "$DSYSTEM""/tvservice-CEA.txt"
+tvservice -m DMT            > "$DSYSTEM""/tvservice-DMT.txt"
+cat /proc/bus/input/devices > "$DSYSTEM""/input-devices.txt"
+
 f_cp /recalbox/recalbox.version                               "$DSYSTEM"
 f_cp /recalbox/recalbox.arch                                  "$DSYSTEM"
 f_cp /boot/config.txt                                         "$DSYSTEM"
