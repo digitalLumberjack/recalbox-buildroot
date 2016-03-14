@@ -3,7 +3,7 @@
 # Retrogame Recalbox https://github.com/ian57/Recalbox-Retrogame-2Players-Pi2
 #
 ################################################################################
-RECALBOX_RETROGAME_VERSION = cb4e1f4c6bf5fb619c9625dbcfd86872249d2b11
+RECALBOX_RETROGAME_VERSION = 8d3e90ed179146d717201b6f4337290100f9ca26
 RECALBOX_RETROGAME_SITE = $(call github,recalbox,Recalbox-Retrogame-2Players-Pi2,$(RECALBOX_RETROGAME_VERSION))
 
 define RECALBOX_RETROGAME_BUILD_CMDS
