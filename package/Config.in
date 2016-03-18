@@ -211,6 +211,7 @@ menu "Controllers"
 	source "package/virtualgamepads/Config.in"
 endmenu
 menu "Emulators"
+	source "package/linapple-pie/Config.in"
 	source "package/mupen64plus-core/Config.in"
 	source "package/mupen64plus-uiconsole/Config.in"
 	source "package/mupen64plus-gles2/Config.in"
@@ -226,6 +227,7 @@ menu "Emulators"
         source "package/retroarch/Config.in"
         source "package/scummvm/Config.in"
         source "package/scummvm-vanfanel/Config.in"
+        source "package/dosbox/Config.in"
 
 if BR2_PACKAGE_RETROARCH
 menu "Libretro Cores"
@@ -1058,6 +1060,7 @@ menu "Hardware handling"
 	source "package/pcsc-lite/Config.in"
 	source "package/tslib/Config.in"
 	source "package/urg/Config.in"
+	source "package/wiringpi/Config.in"
 endmenu
 
 menu "Javascript"

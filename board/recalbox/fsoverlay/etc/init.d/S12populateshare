@@ -32,7 +32,7 @@ for FILE in music bios extractions kodi saves screenshots \
             system/configs/{fba,mupen64,retroarch,shadersets,moonlight} \
             system/recalbox.conf
 do
-    test ! -e "$OUT""/""$FILE" && cp -r "$IN""/""$FILE" "$OUT""/""$FILE"
+    test -e "$IN""/""$FILE" && test ! -e "$OUT""/""$FILE" && cp -r "$IN""/""$FILE" "$OUT""/""$FILE"
 done
 
 # directories to force directories exists
