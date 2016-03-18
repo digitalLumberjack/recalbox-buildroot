@@ -4,24 +4,15 @@
 #
 ################################################################################
 
-DOSBOX_VERSION_TAG = 0.74
-DOSBOX_VERSION_REV = 3969
-DOSBOX_VERSION = $(DOSBOX_VERSION_TAG).R$(DOSBOX_VERSION_REV)
-DOSBOX_SVNDIR = dosbox-trunk
-DOSBOX_SOURCE = dosbox-code-0-$(DOSBOX_VERSION_REV)-$(DOSBOX_SVNDIR).zip
-DOSBOX_SITE = https://sourceforge.net/code-snapshots/svn/d/do/dosbox/code-0
+DOSBOX_SITE =  svn://svn.code.sf.net/p/dosbox/code-0/dosbox/trunk 
+DOSBOX_SITE_METHOD = svn
+DOSBOX_VERSION = r3970
 DOSBOX_LICENSE = GPL2
 DOSBOX_LICENSE_FILES = COPYING
 DOSBOX_DEPENDENCIES = sdl zlib libpng libogg libvorbis sdl_sound sdl_net
 
 DOSBOX_LDFLAGS = -L$(STAGING_DIR)/usr/lib
 DOSBOX_CFLAGS = -I$(STAGING_DIR)/usr/include -I$(STAGING_DIR)/usr/include/SDL
-
-define DOSBOX_EXTRACT_CMDS
-        $(UNZIP) -d $(@D) $(DL_DIR)/$(DOSBOX_SOURCE)
-        mv $(@D)/dosbox-code-0-$(DOSBOX_VERSION_REV)-$(DOSBOX_SVNDIR)/* $(@D)
-        rmdir $(@D)/dosbox-code-0-$(DOSBOX_VERSION_REV)-$(DOSBOX_SVNDIR)
-endef
 
 define DOSBOX_CONFIGURE_CMDS
         (cd $(@D); ./autogen.sh; \
