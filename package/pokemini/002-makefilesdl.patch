@@ -1,8 +1,0 @@
---- a/platform/sdl/makefile	
-+++ b/platform/sdl/makefile	
-11,12c11,12
-< CFLAGS += -Wall `$(SDL_BASE)sdl-config --cflags` $(INCLUDE)
-< SLFLAGS += `$(SDL_BASE)sdl-config --libs` -lm -lz
----
-> CFLAGS += -Wall `$(STAGING_DIR)/usr/bin/sdl-config --cflags` $(INCLUDE)
-> SLFLAGS += `$(STAGING_DIR)/usr/bin/sdl-config --libs` -lm -lz

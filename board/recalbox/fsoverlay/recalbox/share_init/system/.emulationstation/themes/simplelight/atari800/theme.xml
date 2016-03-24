@@ -7,11 +7,11 @@
                         <path>./sounds/system.ogg</path>
                 </sound>
 		<image name="background" extra="true">
-			<path>./art/poke_art_blur.jpg</path>
+			<path>./art/a800_art_blur.jpg</path>
 		</image>
 
 		<image name="logo">
-			<path>./art/poke.svg</path>
+			<path>./art/a800.svg</path>
        		</image>
 		
 		<helpsystem name="help">
@@ -23,10 +23,10 @@
 
 	<view name="basic, detailed">
 		<image name="background">
-                        <path>./art/poke_art_blur.jpg</path>
+                        <path>./art/a800_art_blur.jpg</path>
                 </image>
 		<text name="system_name_1" extra="true">
-			<text>Nintendo</text>
+			<text>Atari</text>
 			<forceUppercase>1</forceUppercase>
 			<size>0.45 0.08</size>
 			<pos>0.527 0.01</pos>
@@ -37,7 +37,7 @@
 		</text>
 		
 		<text name="system_name_2" extra="true">
-			<text>Pokemon Pokemini</text>
+			<text>8bits</text>
 			<forceUppercase>1</forceUppercase>
 			<size>0.45 0.08</size>
 			<pos>0.527 0.07</pos>
@@ -48,7 +48,7 @@
 		</text>
 
 		<image name="logo">
-			<path>./art/poke.svg</path>
+			<path>./art/a800.svg</path>
 			<pos>0.025 0.079</pos>
 			<maxSize>0.55 0.1</maxSize>
 			<origin>0 0.5</origin>

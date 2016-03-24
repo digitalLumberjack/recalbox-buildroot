@@ -1,0 +1,11 @@
+config BR2_PACKAGE_LIBRETRO_ATARI800
+        bool "libretro-atari800"
+	depends on BR2_PACKAGE_RETROARCH
+	depends on BR2_INSTALL_LHASA
+        help
+          A libretro Atari 800 core for ARM.
+
+	  http://www.libretro.com
+
+comment "LIBRETRO_ATARI800 needs a toolchain w/ C++"
+	depends on !BR2_INSTALL_LHASA
