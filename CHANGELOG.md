@@ -9,12 +9,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added support for vice 2.4.24. This means support for commodore c64 and other commodore systems
 - Added theme for commodore c64
 - Added two demo ROMs for commodore c64
+- Add linapple specific parameters to start fixing an issue.
+- Added user's configuration files upgrade
+- Merged buildroot upstream
+- Added retroachievements hardcore mode
+- Add omxplayer to rpi2 & rpi3 defconfig
+- Add Kodi default plugins/repositories
+- Improved S02splash script for video splash
+- linapple-pie download redirected to LaurentMarchelli
 
 ## [4.0.0-beta3][unreleased]
 - Xarcade2jstick button remapped + better support of IPAC encoders
 - Added IPAC2 keyboard encoder
 - Patched xpad driver to support Xbox One controllers in USB mode
 - Updated gamepads inputs to support moonlight
+- Fix some kodi bugs about joysticks
+- Added OpenGL + scalers supports to scummvm
+- Power management switch support for pin 5/6
 
 ## [4.0.0-beta2]
 - Added rpi3 support (without bluetooth)
