@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-LINAPPLE_PIE_VERSION = 2b53a2c0a1d98cb907f52cab3b4bc2b23cb3eecb
-LINAPPLE_PIE_SITE = $(call github,dabonetn,linapple-pie,$(LINAPPLE_PIE_VERSION))
+LINAPPLE_PIE_VERSION = recalbox
+LINAPPLE_PIE_SITE = $(call github,LaurentMarchelli,linapple-pie,$(LINAPPLE_PIE_VERSION))
 LINAPPLE_PIE_LICENSE = GPL2
 LINAPPLE_PIE_LICENSE_FILES = COPYING
 
@@ -29,14 +29,19 @@ endef
 
 ifeq ($(BR2_PACKAGE_RECALBOX_SYSTEM),y)
 LINAPPLE_PIE_CONFDIR = $(TARGET_DIR)/recalbox/share_init/system/.linapple
+LINAPPLE_PIE_CONFFILE = $(LINAPPLE_PIE_CONFDIR)/linapple.conf
 define LINAPPLE_PIE_INSTALL_TARGET_CMDS
 	cp $(@D)/linapple-pie/linapple $(TARGET_DIR)/usr/bin/
 	mkdir -p $(LINAPPLE_PIE_CONFDIR)
 	cp $(@D)/linapple-pie/Master.dsk $(LINAPPLE_PIE_CONFDIR)/
-	cp $(@D)/linapple-pie/linapple.installed.conf $(LINAPPLE_PIE_CONFDIR)/linapple.conf
-	$(SED) "s|^\(\s*\)Slot 6 Directory =.*|\1Slot 6 Directory = /recalbox/share/roms/apple2|g" $(LINAPPLE_PIE_CONFDIR)/linapple.conf
-	$(SED) "s|^\(\s*\)Save State Directory =.*|\1Save State Directory = /recalbox/share/saves/apple2|g" $(LINAPPLE_PIE_CONFDIR)/linapple.conf
-	$(SED) "s|^\(\s*\)FTP Local Dir =.*|\1FTP Local Dir = /recalbox/share/roms/apple2|g" $(LINAPPLE_PIE_CONFDIR)/linapple.conf
+	cp $(@D)/linapple-pie/linapple.installed.conf $(LINAPPLE_PIE_CONFFILE)
+	$(SED) "s|^\(\s*\)Slot 6 Directory =.*|\1Slot 6 Directory = /recalbox/share/roms/apple2|g" $(LINAPPLE_PIE_CONFFILE)
+	$(SED) "s|^\(\s*\)Save State Directory =.*|\1Save State Directory = /recalbox/share/saves/apple2|g" $(LINAPPLE_PIE_CONFFILE)
+	$(SED) "s|^\(\s*\)FTP Local Dir =.*|\1FTP Local Dir = /recalbox/share/roms/apple2|g" $(LINAPPLE_PIE_CONFFILE)
+	echo -e "\n##########################################################################" >> $(LINAPPLE_PIE_CONFFILE)
+	echo -e "#\tRecalbox specific parameters\n" >> $(LINAPPLE_PIE_CONFFILE)
+	echo -e "\tRecalboxRomDirectory =\t/recalbox/share/roms/apple2" >> $(LINAPPLE_PIE_CONFFILE)
+	echo -e "\tRecalboxSaveDirectory =\t/recalbox/share/saves/apple2" >> $(LINAPPLE_PIE_CONFFILE)
 endef
 else
 LINAPPLE_PIE_STARTUP = /usr/bin/linapple

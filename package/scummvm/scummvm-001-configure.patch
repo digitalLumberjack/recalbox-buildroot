@@ -1,0 +1,47 @@
+--- a/configure	2016-03-28 12:48:42.603648506 +0200
++++ b/configure	2016-03-28 13:12:50.980312100 +0200
+@@ -1277,7 +1277,6 @@
+ 		done
+ 		;;
+ 	*)
+-		option_error
+ 		;;
+ 	esac;
+ done;
+@@ -2578,18 +2577,18 @@
+ 			# but Raspbian does.
+ 			# Be careful as it's the linker (LDFLAGS) which must know about sysroot.
+ 			# These are needed to build against Raspbian's libSDL.
+-			append_var LDFLAGS "--sysroot=$RPI_ROOT"
+-			append_var LDFLAGS "-B$RPI_ROOT/usr/lib/arm-linux-gnueabihf"
+-			append_var LDFLAGS "-Xlinker --rpath-link=$RPI_ROOT/usr/lib/arm-linux-gnueabihf"
+-			append_var LDFLAGS "-Xlinker --rpath-link=$RPI_ROOT/lib/arm-linux-gnueabihf"
+-			append_var LDFLAGS "-Xlinker --rpath-link=$RPI_ROOT/opt/vc/lib"
+-			append_var LDFLAGS "-L$RPI_ROOT/opt/vc/lib"
++			#append_var LDFLAGS "--sysroot=$RPI_ROOT"
++			#append_var LDFLAGS "-B$RPI_ROOT/usr/lib/arm-linux-gnueabihf"
++			#append_var LDFLAGS "-Xlinker --rpath-link=$RPI_ROOT/usr/lib/arm-linux-gnueabihf"
++			#append_var LDFLAGS "-Xlinker --rpath-link=$RPI_ROOT/lib/arm-linux-gnueabihf"
++			#append_var LDFLAGS "-Xlinker --rpath-link=$RPI_ROOT/opt/vc/lib"
++			#append_var LDFLAGS "-L$RPI_ROOT/opt/vc/lib"
+ 			# This is so optional OpenGL ES includes are found.
+-			append_var CXXFLAGS "-I$RPI_ROOT/opt/vc/include"
++			#append_var CXXFLAGS "-I$RPI_ROOT/opt/vc/include"
+ 			_savegame_timestamp=no
+ 			_eventrec=no
+-			_build_scalers=no
+-			_build_hq_scalers=no
++			_build_scalers=yes
++			_build_hq_scalers=yes
+ 			# We prefer SDL2 on the Raspberry Pi: acceleration now depends on it 
+ 			# since SDL2 manages dispmanx/GLES2 very well internally.
+ 			# SDL1 is bit-rotten on this platform.
+@@ -4063,7 +4062,7 @@
+ 		# 2) GLESv1_CM  This is used by the Windows Mali OpenGL ES 1.1 Emulator
+ 		# 3) glesv1     This is used by the Linux Mali OpenGL ES 1.1 Emulator
+ 		_opengles=no
+-		for lib in "-lGLES_CM" "-lGLESv1_CM" "-lglesv1"; do
++		for lib in "-lGLES_CM" "-lGLESv1_CM" "-lGLESv2"; do
+ 			if cc_check_no_clean $DEFINES $OPENGL_CFLAGS $OPENGL_LIBS $lib
+ 				then
+ 				_opengl=yes
