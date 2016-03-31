@@ -1,0 +1,7 @@
+config BR2_PACKAGE_ADVANCEMAME
+        bool "advancemame"
+        help
+          Advance Mame for ARM.
+
+	  http://www.advancemame.it/
+
