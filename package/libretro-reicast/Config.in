@@ -1,0 +1,11 @@
+config BR2_PACKAGE_LIBRETRO_REICAST
+        bool "libretro-reicast"
+	depends on BR2_PACKAGE_SDL2
+	depends on BR2_INSTALL_LIBSTDCPP
+        help
+          A libretro reicast  core for ARM.
+
+	  http://www.libretro.com
+
+comment "LIBRETRO_REICAST needs a toolchain w/ C++"
+	depends on !BR2_INSTALL_LIBSTDCPP
