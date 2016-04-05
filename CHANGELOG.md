@@ -19,6 +19,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - linapple-pie download redirected to LaurentMarchelli
 - passed to gcc5
 - Added pgrep to busybox for omxplayer extensions
+- New video version and splash video now stopped when kodi is started
+- Added custom ratio per game option
 
 ## [4.0.0-beta3][unreleased]
 - Xarcade2jstick button remapped + better support of IPAC encoders
@@ -32,6 +34,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added megatools
 - Added new recalbox 4.0.0 systems
 - Added crt-pi shaders
+- Fix Namco/Taito games in mame2003
 
 ## [4.0.0-beta2]
 - Added rpi3 support (without bluetooth)
