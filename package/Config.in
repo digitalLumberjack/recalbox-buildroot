@@ -196,6 +196,7 @@ endmenu
 
 menu "Recalbox"
 	source "package/recalbox-system/Config.in"
+	source "package/recalbox-themes/Config.in"
 	source "package/recalbox-configgen/Config.in"
 	source "package/moonlight-embedded/Config.in"
 	source "package/recalbox-manager/Config.in"
@@ -217,6 +218,7 @@ menu "Controllers"
 	source "package/virtualgamepads/Config.in"
 endmenu
 menu "Emulators"
+	source "package/ppsspp/Config.in"
 	source "package/linapple-pie/Config.in"
 	source "package/mupen64plus-core/Config.in"
 	source "package/mupen64plus-uiconsole/Config.in"
@@ -235,6 +237,7 @@ menu "Emulators"
         source "package/scummvm-vanfanel/Config.in"
         source "package/dosbox/Config.in"
         source "package/vice/Config.in"
+        source "package/reicast/Config.in"
 
 if BR2_PACKAGE_RETROARCH
 menu "Libretro Cores"

@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unrelease][unreleased]
+- Add Mayflash NES/SNES and SEGA SATURN in usbhid.conf
 - Added omxplayer to enable Introduction video
 - Updated recalbox-configgen to version 4.1.X
 - Added linapple-pie to recalbox-rpi3_defconfig
@@ -26,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Network connection manager : ethernet configuration on wire connection
 - Network connection manager : multiple wifi configurations
 - Wifi : open/wep/wpa/wpa2
+- New emulator : reicast
 
 ## [4.0.0-beta3][unreleased]
 - Xarcade2jstick button remapped + better support of IPAC encoders
@@ -40,6 +42,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added new recalbox 4.0.0 systems
 - Added crt-pi shaders
 - Fix Namco/Taito games in mame2003
+- Added kempston joystick by default for zxspectrum
+- Updated scummvm to version 1.8
+- Added VIM
+- Added recalbox-themes package
+- Recalbox theme now default
 
 ## [4.0.0-beta2]
 - Added rpi3 support (without bluetooth)
