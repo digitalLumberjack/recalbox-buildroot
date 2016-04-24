@@ -1,0 +1,9 @@
+config BR2_PACKAGE_POKEMINI
+        bool "pokemini"
+        depends on BR2_PACKAGE_SDL2
+        depends on BR2_PACKAGE_ZLIB
+        depends on BR2_PACKAGE_HAS_UDEV
+        help
+          A Pokemini emulator core for SDL.
+
+
