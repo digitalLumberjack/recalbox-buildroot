@@ -4,7 +4,6 @@ do_start ()
 {
     video="/recalbox/system/resources/splash/recalboxintro.mp4"
     if [[ -f $video ]]; then
-
         # Initialize dbus session
         OMXPLAYER_DBUS_ADDR="/tmp/omxplayerdbus.root"
         OMXPLAYER_DBUS_PID="/tmp/omxplayerdbus.root.pid"
@@ -64,3 +63,4 @@ case "$1" in
 esac
 
 exit $?
+
