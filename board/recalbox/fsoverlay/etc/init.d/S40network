@@ -9,6 +9,7 @@ case "$1" in
 	/sbin/ifup lo
         /recalbox/scripts/recalbox-config.sh ethernet start
         /recalbox/scripts/recalbox-config.sh wifi start
+        /recalbox/scripts/recalbox-config.sh usbnet start
         ;;
   stop)
         echo -n "Stopping network..."

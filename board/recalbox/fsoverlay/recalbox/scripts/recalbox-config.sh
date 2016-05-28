@@ -219,7 +219,7 @@ if [ -f "$configFile" ];then
         echo "`logtime` : enabled overclock mode : $mode" >> $log
 
 	postBootConfig
-	
+
 	exit 0
 else
 	exit 2
@@ -315,6 +315,26 @@ if [[ "$command" == "ethernet" ]]; then
 fi
 
 
+if [[ "$command" == "usbnet" ]]; then
+        usb="usb`ifconfig -a | sed -n \"s/usb\(.\).*/\1/p\"`"
+        if [[ "$?" != "0" || "$usb" == "usb" ]];then
+                echo "`logtime` : no usb interface found" >> $log
+                exit 1
+        else
+                echo "`logtime` : $usb will be used as wired interface"
+        fi
+        sed -i "s/usb[0-9]\+/$usb/g" /var/network/interfaces # directly modify the file and not the link because sed create a temporary file in the same directory
+        if [[ "$mode" == "start" ]]; then
+                /sbin/ifdown $usb >> $log
+                /sbin/ifup $usb >> $log
+                exit $?
+        elif [[ "$mode" == "stop" ]]; then
+                /sbin/ifdown $usb >> $log
+                exit $?
+        fi
+fi
+
+
 if [[ "$command" == "wifi" ]]; then
         if [[ ! -f "$wpafile" ]];then
                 echo "`logtime` : $wpafile do not exists" >> $log
@@ -377,7 +397,7 @@ if [[ "$command" == "hiddpair" ]]; then
 	name="$extra1"
 	mac1="$mode"
 	mac=`echo $mac1 | grep -oEi "([0-9A-F]{2}[:-]){5}([0-9A-F]{2})" | tr '[:upper:]' '[:lower:]'`
-	if [ "$?" != "0" ]; then 
+	if [ "$?" != "0" ]; then
 		exit 1
 	fi
 	echo "pairing $name $mac" >>  $log
