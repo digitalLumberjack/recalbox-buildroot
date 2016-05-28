@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Slide transition by default in ES
 - Power management switch support (power,reset and LED) for pin 3/5/6
 - Add ifconfig -a and /boot/recalbox-boot.conf in recalbox-support.sh
+- Add support for usb network interfaces
 
 ## [4.0.0-beta3] - 2016-04-19
 - Xarcade2jstick button remapped + better support of IPAC encoders
@@ -39,7 +40,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fixed system locales
 - Updated 8bitdo gamepads
 - Bumped to moonlight-embedded-2.1.4
-- Overclock set to none now delete lines in config.txt 
+- Overclock set to none now delete lines in config.txt
 - Improved keyboard encoders support
 - Fixed an issue concerning ISO loading taking too long
 
@@ -64,7 +65,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added Chinese and Turkish
 - Added samba switch in recalbox.conf
 - Added WiiMote support
-- Added Kodi controller support 
+- Added Kodi controller support
 - Corrected controller <-> player attribution
 - Added moonlight system support, with roms
 - Added new switch in recalbox.conf for ssh and virtual gamepads
@@ -95,7 +96,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [3.3.0-beta9] - 2015-10-11
 - Fixed Moonlight theme for zoid
 - Added splashscreen for long reboots
-- Added mplayer and jscal 
+- Added mplayer and jscal
 - Updated atari 2600 stella core for 2 players support
 - Updated fba libretro for R3 diag menu
 - Added xbox 360 official wireless dongle support OOTB
@@ -151,7 +152,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added Vectrex libretro emulator
 - Added Game And Watch libretro emulator
 - Added Lynx libretro emulator
-- Added PRBoom libretro 
+- Added PRBoom libretro
 - Modif zoid theme
 - Patched kernel to support retrobit controllers
 - Patched kernel to support 4NES4SNES controllers
@@ -175,7 +176,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added Tgbdual libretro core
 - Added Miroof's Virtual Gamepads
 - Added silent install
- 
+
 ## [3.2.11] - 2015-03-24
 - Corrected issues with controllers with idientical names
 - Added zoid theme
@@ -187,7 +188,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [3.2.9] - 2015-03-15
 ### Changed
 - Added fba emulator switch
-- Added snes9x, catsfc, pocketsnes switch 
+- Added snes9x, catsfc, pocketsnes switch
 - Added virtualboy platform
 - Fixed : buttons on axis in retroarch config
 - Added timestamps in logs
