@@ -32,6 +32,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Bumped retroarch to v1.3.4
 - Added retroachievements support to fceunext core
 - Reicast : add multiplayer support
+- ES shuts the system down itself
 
 ## [4.0.0-beta3][unreleased]
 - Xarcade2jstick button remapped + better support of IPAC encoders
