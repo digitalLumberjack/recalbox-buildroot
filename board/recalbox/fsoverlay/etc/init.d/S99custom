@@ -1,3 +1,22 @@
 #!/bin/bash
+#
+#
 
-test -e "/recalbox/share/system/custom.sh" && /recalbox/share/system/custom.sh $1
+log=/recalbox/share/system/logs/recalbox.log
+param=""
+
+[ ! -f /recalbox/share/system/custom.sh ] && exit 1 
+case "$1" in
+  start)
+    param="start"
+  ;;
+  stop)
+    param="stop"
+  ;;
+  *)
+  ;;
+esac
+  
+if param<>"" then eval /recalbox/share/system/custom.sh $param >> $log & fi
+
+exit
