@@ -22,4 +22,9 @@ find "/usr/share/kodi/system/keymaps" -name "joystick.*.xml" |
 	doClean "${X}"
     done
 
+# V4.1.0 2016-04-10
+# the upgrade will fail to replace link by a file
+doClean "/etc/network/interfaces.base"
+doClean "/etc/wpa_supplicant/wpa_supplicant.conf"
+
 exit 0
