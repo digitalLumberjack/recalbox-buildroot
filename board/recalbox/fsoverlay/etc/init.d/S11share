@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if test "$1" != "start"
+then
+  exit 0
+fi
+
 ###
 # SHARECONFFILE
 # can contain :
@@ -100,7 +105,7 @@ mountNetwork() {
     # /boot/recalbox-boot.conf examples :
     # sharedevice=NETWORK
     #
-    # Basic commands : sharenetwork_<nfs|smb><[0-9]>=<SHARE|ROMS|SAVES>@<host>:<remote directory>:<mount options>
+    # Basic commands : sharenetwork_<nfs|smb><[0-9]>=<SHARE|ROMS|SAVES|BIOS>@<host>:<remote directory>:<mount options>
     #
     # sharenetwork_nfs1=SHARE@192.168.0.1:/Documents/recalbox
     # or
@@ -151,6 +156,9 @@ mountNetwork() {
 			    ;;
 			    "SAVES")
 				CMD_TDIR="/recalbox/share/saves"
+			    ;;
+			    "BIOS")
+				CMD_TDIR="/recalbox/share/bios"
 			    ;;
 			esac
 
