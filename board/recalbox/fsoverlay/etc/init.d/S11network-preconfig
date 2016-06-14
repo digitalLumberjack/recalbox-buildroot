@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# this script get a network connection at the early stage of the recalbox boot process
+# it is required only to mount share device of network type
+
+# prenetwork configuration is only done at startup
+if test "$1" != "start"
+then
+  exit 0
+fi
+
+# it doesn't support wifi for the moment
+# sharedevice must be set on NETWORK to play this part
+if ! grep -qE '^[ ]*sharedevice[ ]*=[ ]*NETWORK[ ]*$' /boot/recalbox-boot.conf
+then
+    exit 0
+fi
+
+# all these steps are prerequisites to be able to mount /share or /share/roms or /share/saves on the network
+# all these steps are replayed next in the boot process but have no impact by beeing replayed
+/sbin/ifup -a
+/etc/init.d/S30dbus start
+/etc/init.d/S45connman start 
