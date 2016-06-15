@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unrelease][unreleased]
+- Addin fbcp for small TFT screen. Allows to copy /dev/fb0 to /dev/fb1 (tft screen on SPI or I2C)
 - New emulator : PPSSPP
 - Add Mayflash NES/SNES and SEGA SATURN in usbhid.conf
 - Added omxplayer to enable Introduction video
