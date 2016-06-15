@@ -15,8 +15,20 @@ INTERNALDEVICE=`cat ${SHARECONFFILE} | grep "internal=" | head -n1 | cut -d'=' -
 SHAREDEVICE=`cat ${SHARECONFFILE} | grep "sharedevice=" | head -n1 | cut -d'=' -f2`
 [[ "$?" -ne "0" || "$SHAREDEVICE" == "" ]] && SHAREDEVICE=INTERNAL
 
+getMaxTryConfig() {
+    SHARECONFFILE=${1}
+
+    X=$(grep -E '^[ \t]*sharewait[ \t]*=' "${SHARECONFFILE}" | sed -e s+'^[ \t]*sharewait[ \t]*='+''+)
+    if echo "${X}" | grep -qE '^[0-9][0-9]*$'
+    then
+	echo "${X}"
+	return
+    fi
+    echo 7 # default value
+}
+
 INTERNALDEVICETYPE="ext4" # faster than waiting udev to initialize to get the type
-MAXTRY=5
+MAXTRY=$(getMaxTryConfig "${SHARECONFFILE}")
 NTRY=0
 
 # a recalbox is about 40000 files in *.xz
@@ -151,6 +163,8 @@ do_upgrade() {
 	    xz -dc < "${ROOTTAR}" | tar xvf - >> /tmp/upgrade.files && \
 	    mv ./etc/fstab.upgrade ./etc/fstab)
 	then
+	    NEW_VERSION=$(sed -rn "s/^\s*([0-9a-zA-Z.]*)\s*.*$/\1/p" /recalbox/recalbox.version)
+	    python -c "import sys; sys.path.append('/usr/lib/python2.7/site-packages/configgen'); from emulatorlauncher import config_upgrade; config_upgrade('$NEW_VERSION')"
 	    EXIT_CODE=0
 	fi
 	sync
@@ -222,6 +236,14 @@ then
     
     # rebooting now
     shutdown -r now
+fi
+
+# share upgrade, just unzip share.zip from upgrade, no need to reboot
+if test -e "/recalbox/share/system/upgrade/share.zip"
+then
+    (cd /recalbox/share && unzip -o /recalbox/share/system/upgrade/share.zip) > /recalbox/share/system/upgrade/upgrade.share.out.log 2> /recalbox/share/system/upgrade/upgrade.share.err.log
+    # always remove to not apply indefinitly
+    rm -f /recalbox/share/system/upgrade/share.zip
 fi
 
 # now, let mount delayed usbmount devices
