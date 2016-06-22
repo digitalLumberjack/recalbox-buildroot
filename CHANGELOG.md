@@ -43,6 +43,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add ipega 9021 rules
 - ES now shutdowns the system
 - share/roms/saves/bios available via a network point
+- linux kernel bumped to 4.4.13
 
 ## [4.0.0-beta3] - 2016-04-19
 - Xarcade2jstick button remapped + better support of IPAC encoders
