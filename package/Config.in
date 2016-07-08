@@ -319,6 +319,9 @@ menu "Utils"
         source "package/megatools/Config.in"
         source "package/jstest2/Config.in"
 endmenu
+menu "Small TFT Screen"
+        source "package/rpi-fbcp/Config.in"
+endmenu
 endmenu
 
 menu "Fonts, cursors, icons, sounds and themes"
