@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unrelease][unreleased]
+- Update Mame2003 core to get the mame2003-skip_warnings and avoid splash screen
 - New emulator : PPSSPP
 - Add Mayflash NES/SNES and SEGA SATURN in usbhid.conf
 - Added omxplayer to enable Introduction video
@@ -43,8 +44,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - ES now shutdowns the system
 - share/roms/saves/bios available via a network point
 - bumped SDL to 2.0.4
+- disable multitouch axis in SDL 2.0.4
 - linux kernel bumped to 4.4.13
-- Add DosBox 0.74 (rev 3980) with specific patches: SDL2, with mapping of mouse and all axis of joysticks
+- Add DosBox 0.74 (rev 3989) with specific patches: SDL2, with mapping of mouse and all axis of joysticks
+- Add lutro extension
 
 ## [4.0.0-beta3] - 2016-04-19
 - Xarcade2jstick button remapped + better support of IPAC encoders
