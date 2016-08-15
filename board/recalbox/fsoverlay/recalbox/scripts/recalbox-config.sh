@@ -12,8 +12,6 @@ extra1="$3"
 extra2="$4"
 arch=`cat /recalbox/recalbox.arch`
 
-recalboxupdateurl="http://archive.recalbox.com/4"
-
 preBootConfig() {
     mount -o remount,rw /boot
 }
@@ -297,7 +295,17 @@ if [ "$command" == "canupdate" ];then
 		# force a default value in case the value is removed or miswritten
 		updatetype="stable"
 	fi
-	available=`wget -qO- ${recalboxupdateurl}/${arch}/${updatetype}/last/recalbox.version`
+	recalboxupdateurl="http://archive.recalbox.com"
+	updateurl="`$systemsetting  -command load -key updates.url`"
+
+	# customizable upgrade url website
+	if test -n "${updateurl}"
+	then
+	    recalboxupdateurl="${updateurl}"
+	fi
+
+	majorversion=4
+	available=`wget -qO- ${recalboxupdateurl}/${majorversion}/${arch}/${updatetype}/last/recalbox.version`
 	if [[ "$?" != "0" ]];then
 		exit 2
 	fi
