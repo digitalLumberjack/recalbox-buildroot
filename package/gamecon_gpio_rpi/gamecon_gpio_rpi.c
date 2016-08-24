@@ -422,7 +422,7 @@ static void gc_gcube_process_packet(struct gc *gc)
 #define GC_NES_LATCH	0x800
 
 static const unsigned char gc_nes_bytes[] = { 0, 1, 2, 3 };
-static const unsigned char gc_snes_bytes[] = { 8, 0, 2, 3, 9, 1, 10, 11 };
+static const unsigned char gc_snes_bytes[] = { 0, 1, 2, 3, 8, 9, 10, 11 };
 static const short gc_snes_btn[] = {
 	BTN_A, BTN_B, BTN_SELECT, BTN_START, BTN_X, BTN_Y, BTN_TL, BTN_TR
 };
