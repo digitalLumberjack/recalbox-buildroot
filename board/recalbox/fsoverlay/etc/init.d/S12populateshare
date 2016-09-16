@@ -90,4 +90,50 @@ mkdir -p /recalbox/share/system/udev/rules.d
 rm -rf /run/udev/rules.d
 ln -s /recalbox/share/system/udev/rules.d/ /run/udev/
 
+# Update recalbox.conf
+cfgIn=$IN/system/recalbox.conf
+cfgIn=$IN/system/recalbox.conf
+cfgOut=$OUT/system/recalbox.conf
+rbxVersion=/recalbox/recalbox.version
+curVersion=$OUT/system/logs/lastrecalbox.conf.update
+LOG=$OUT/system/logs/recalbox.log
+skipped=(system. kodi. wifi. audio.)
+forced=(controllers.ps3.driver)
+
+# Shall we run the recalbox.conf update process ?
+currentVersion=$(cat $rbxVersion)
+lastConfUpdate=$(cat $curVersion 2>/dev/null)
+
+[ "$currentVersion" == "$lastConfUpdate" ] && echo "recalbox.conf already up-to-date" >> $LOG && exit 0
+
+echo "UPDATE : recalbox.conf" >> $LOG
+
+cp $cfgOut ${cfgOut}-pre-$(cat /recalbox/recalbox.updateversion)
+grep -v '^[#;]\|^$' $cfgIn | while read -r property
+do
+    skip=0
+    name=$(echo $property | cut -d '=' -f 1)
+
+    # Should we force the value ?
+    for  propname in "${forced[@]}"
+    do
+        # Should protect . in the $property
+        nameRegExp=$(echo $name | sed 's/\./\\\./g')
+        echo $name | grep -q "^$propname" && echo "FORCING : $property" >> $LOG && sed -i "s/^$nameRegExp=.*/$property/g" $cfgOut
+    done
+
+    # Should we skip this value ?
+    for  propname in "${skipped[@]}"
+    do
+        echo $name | grep -q "^$propname" && echo "SKIPPING : $name" >> $LOG && skip=1 && break
+    done
+    [ $skip -eq 1 ] && continue
+
+    # if the property doesn't exist, add it
+    grep -q "$name" $cfgOut || ( echo "ADDING to $cfgOut : $property" >> $LOG ; echo "$property" >> $cfgOut )
+done
+
+# Update is done, set the right version number
+cp $rbxVersion $curVersion
+
 # END
