@@ -47,7 +47,6 @@ function doRbxConfUpgrade {
   # so we can report them back in the new recalbox.conf
   declare -A userValues
   while read -r property ; do
-    # [[ $property =~ ^[#\;]{0,}$ ]] && continue
     name=`echo $property | cut -d '=' -f 1`
     nameRegExp=$(echo $name | sed 's/\./\\\./g')
     value=`echo -E $property | sed "s/$nameRegExp=//g"`
@@ -79,9 +78,6 @@ function doRbxConfUpgrade {
       fi
     fi
   done < $cfgIn
-
-  echo "Remaining options :"
-  echo "${!userValues[@]}"
 
   if [[ ${#userValues[@]} -gt 0 ]] ; then
     echo -e "\n## User custom properties" >> $cfgOut
