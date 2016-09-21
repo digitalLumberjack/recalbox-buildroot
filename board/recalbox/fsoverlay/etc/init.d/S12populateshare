@@ -69,6 +69,9 @@ do
     fi
 done
 
+# recalbox.conf : upgrade if necessary
+doRbxConfUpgrade
+
 # ssh : create the ssh key while the -R option of dropbear try a chown or an operation which is not permitted on fat32
 if ! test -e /recalbox/share/system/ssh
 then
