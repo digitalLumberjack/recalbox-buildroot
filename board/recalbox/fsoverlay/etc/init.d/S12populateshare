@@ -5,6 +5,8 @@ then
   exit 0
 fi
 
+source /recalbox/scripts/recalbox-includes.sh
+
 IN=/recalbox/share_init
 OUT=/recalbox/share
 # force the creation of some directories
