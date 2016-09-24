@@ -34,7 +34,7 @@ function doRbxConfUpgrade {
   curVersion=$_SHARE/system/logs/lastrecalbox.conf.update
   updVersion=$_RBX/recalbox.updateversion
   forced=(controllers.ps3.driver)
-  savefile=${cfgOut}-pre-$(cat $updVersion)
+  savefile=${cfgOut}-pre-$(cat $rbxVersion | sed "s+[/ :]++g")
 
   # Check if an update is necessary
   diff -N "$curVersion" "$rbxVersion" > /dev/null 2>&1 && recallog "recalbox.conf already up-to-date" && return 0
