@@ -62,20 +62,18 @@ function doRbxConfUpgrade {
     if [[ $property == "" ]]; then
       echo "" >> $cfgOut
     # Should we force the value ?
-    elif containsElement "$name" $forced; then
+    elif containsElement "$name" ${forced[@]}; then
       recallog "FORCING : $property"
       echo $property >> $cfgOut
       unset -v userValues["$realname"]
+    elif containsElement "$realname" ${!userValues[@]}; then
+      recallog "ADDING user defined to $cfgOut : $realname=${userValues[$realname]}"
+      echo -E "$realname=${userValues[$realname]}" >> $cfgOut
+      unset -v userValues["$realname"]
     else
-      if containsElement "$realname" ${!userValues[@]}; then
-        recallog "ADDING user defined to $cfgOut : $property"
-        echo -E "$realname=${userValues[$realname]}" >> $cfgOut
-        unset -v userValues["$realname"]
-      else
-        # need to protect
-        recallog "ADDING default to $cfgOut : $property"
-        echo $property >> $cfgOut
-      fi
+      # need to protect
+      recallog "ADDING default to $cfgOut : $property"
+      echo $property >> $cfgOut
     fi
   done < $cfgIn
 
