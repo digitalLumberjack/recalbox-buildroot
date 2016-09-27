@@ -32,7 +32,6 @@ function doRbxConfUpgrade {
   cfgOut=$_SHARE/system/recalbox.conf
   rbxVersion=$_RBX/recalbox.version
   curVersion=$_SHARE/system/logs/lastrecalbox.conf.update
-  updVersion=$_RBX/recalbox.updateversion
   forced=(controllers.ps3.driver)
   savefile=${cfgOut}-pre-$(cat $rbxVersion | sed "s+[/ :]++g")
 
