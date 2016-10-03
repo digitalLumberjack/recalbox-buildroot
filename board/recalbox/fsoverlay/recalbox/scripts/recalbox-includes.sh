@@ -47,8 +47,7 @@ function doRbxConfUpgrade {
   declare -A userValues
   while read -r property ; do
     name=`echo $property | cut -d '=' -f 1`
-    nameRegExp=$(echo $name | sed 's/\./\\\./g')
-    value=`echo -E $property | sed "s/$nameRegExp=//g"`
+    value=`echo -E $property | cut -d '=' -f 2-`
     userValues["$name"]="$value"
   done < <(grep -v '^[#;]\|^$' "$savefile")
 
