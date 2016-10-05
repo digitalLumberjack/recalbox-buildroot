@@ -1,0 +1,11 @@
+config BR2_PACKAGE_LIBRETRO_BSNES_MERCURY
+        bool "bsnes_mercury_accuracy_libretro.so"
+	depends on BR2_PACKAGE_RETROARCH
+	depends on BR2_INSTALL_LIBSTDCPP
+        help
+          An alternative libretro SNES emulator core for ARM.
+
+	  http://www.libretro.com
+
+comment "LIBRETRO_BSNES_MERCURY needs a toolchain w/ C++"
+	depends on !BR2_INSTALL_LIBSTDCPP
