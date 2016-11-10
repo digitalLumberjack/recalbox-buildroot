@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unrelease][unreleased]
+- Bump rpi-firmware to ad8608c08b122b2c228dba0ff5070d6e9519faf5 and rpi-userland to a1b89e91f393c7134b4cdc36431f863bb3333163 to have the video resolution change on the fly thanks to vcgencmd commande line see https://github.com/raspberrypi/firmware/issues/637
 - Fixing Makelfiles for compilation of libretro-lutro for the bump to release 2377dd37ad3bd37ddef9fc37742bba2531a78407
 - Bump retroarch to last release due to integration of libretro-imageviewer in its cores, and delation of the libretro-imageviewer repos
 - Update Mame2003 core to get the mame2003-skip_warnings and avoid splash screen
