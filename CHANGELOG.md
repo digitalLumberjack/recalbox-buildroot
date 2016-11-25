@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unrelease][unreleased]
+- Bump rpi-userland a1b89e91f393c7134b4cdc36431f863bb3333163 and rpi-firmware ad8608c08b122b2c228dba0ff5070d6e9519faf5 to change be able to change video résolution on the fly via the vcgencmd command
 - Fixing BT firmware copy for Realtek BT devices (81xx 87xx and 88xx)
 - Fixing Makelfiles for compilation of libretro-lutro for the bump to release 2377dd37ad3bd37ddef9fc37742bba2531a78407
 - Bump retroarch to last release due to integration of libretro-imageviewer in its cores, and delation of the libretro-imageviewer repos
