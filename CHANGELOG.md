@@ -69,6 +69,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [3.3.0-beta17]
 - New version of xboxdrv
 - Corrected 8bitdo mapping
+- Added wiringpi
 
 ## [3.3.0-beta16] - 2015-11-24
 - Corrected kodi start
