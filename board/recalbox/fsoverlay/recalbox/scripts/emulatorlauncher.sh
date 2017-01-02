@@ -76,7 +76,7 @@ if [[ "$emulator" == "snes" ]]; then
 fi
 
 if [[ "$emulator" == "nes" ]]; then
-	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/fceunext_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
+	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/nestopia_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
 fi
 if [[ "$emulator" == "virtualboy" ]]; then
 	/recalbox/scripts/runcommand.sh 4 "$retroarchbin -L $retroarchcores/vb_libretro.so --config /recalbox/configs/retroarch/retroarchcustom.cfg \"$1\""
