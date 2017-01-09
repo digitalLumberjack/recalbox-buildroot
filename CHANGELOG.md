@@ -83,6 +83,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add usbhid for Retrobit Genesis to PC USB Adapter
 - new arcade emulator: AdvanceMame
 - 7z support for fba_libretro
+- Synced with buildroot 2016.11 
 
 ## [4.0.0-beta5] - 2016-08-13hs the ratio issue in mame.
 - Improved pads and gpio support for moonlight

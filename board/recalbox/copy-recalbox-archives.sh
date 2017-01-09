@@ -142,10 +142,10 @@ case "${RECALBOX_TARGET}" in
 	do
 	    cp "${BUILD_DIR}/uboot-odroidc2-v2015.01/sd_fuse/${F}" "${BINARIES_DIR}" || exit 1
 	done
-	cp board/hardkernel/odroidc2/boot-logo.bmp.gz ${BINARIES_DIR} || exit 1
+	cp board/recalbox/c2/boot-logo.bmp.gz ${BINARIES_DIR} || exit 1
 
 	# /boot
-	cp "board/hardkernel/odroidc2/boot.ini" ${BINARIES_DIR}/boot.ini || exit 1
+	cp "board/recalbox/c2/boot.ini" ${BINARIES_DIR}/boot.ini || exit 1
 
 	# root.tar.xz
 	cp "${BINARIES_DIR}/rootfs.tar.xz" "${RECALBOX_BINARIES_DIR}/root.tar.xz" || exit 1

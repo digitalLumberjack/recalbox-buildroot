@@ -9,14 +9,14 @@ stages:
   stage: build
   script:
     - docker build -t recalbox-${ARCH} . 
-    - docker run --rm -v `pwd`:/work -v /recalbox-builds/dl:/share/dl -v /recalbox-builds/hosts/host-${ARCH}:/share/host -e "ARCH=$ARCH" recalbox-${ARCH} >> build.log 2>&1
+    - docker run --rm -v `pwd`:/work -v /recalbox-builds/dl:/share/dl -v /recalbox-builds/hosts/host-${ARCH}:/share/host -v /recalbox-builds/ccache:/share/ccache -e "ARCH=$ARCH" -e "RECALBOX_VERSION_LABEL=${CI_BUILD_REF_SLUG}-${ARCH}-build-${CI_BUILD_ID}" -e "RECALBOX_UPDATE_MESSAGE='automatic build ${CI_BUILD_REF_SLUG}-${ARCH}-build-${CI_BUILD_ID}'" -e "RECALBOX_CCACHE_DIR=/share/ccache" recalbox-${ARCH} >> build.log 2>&1
     - tail -n 200 build.log
     - ls output/images/recalbox/
     - mkdir -p dist/${ARCH}
-    - for file in `ls dist/${ARCH}/`;do sha1sum dist/${ARCH}/${file} > dist/${ARCH}/${file}.sha1; done
-    - tar tf output/images/recalbox/root.tar.xz | sort > "dist/${ARCH}/root.list"
-    - echo "${ARCH}-${CI_BUILD_ID}-`date`" >> dist/${ARCH}/recalbox.version
     - cp output/images/recalbox/* dist/${ARCH}
+    - for file in `ls dist/${ARCH}/`;do sha1sum dist/${ARCH}/${file} > dist/${ARCH}/${file}.sha1; done
+    - tar tf dist/${ARCH}/root.tar.xz | sort > dist/${ARCH}/root.list
+    - echo "${CI_BUILD_REF_SLUG}-${ARCH}-build-${CI_BUILD_ID}" >> dist/${ARCH}/recalbox.version
   artifacts:
     name: dist-${ARCH}-${CI_BUILD_ID}
     when: always
