@@ -1,0 +1,11 @@
+--- a/libretro-common/include/streams/interface_stream.h	2017-01-10 07:26:42.573804504 +0100
++++ b/libretro-common/include/streams/interface_stream.h	2017-01-10 07:27:04.685887493 +0100
+@@ -25,6 +25,7 @@
+ 
+ #include <stdint.h>
+ #include <stddef.h>
++#include <sys/types.h>
+ 
+ #include <retro_common_api.h>
+ #include <boolean.h>
+
