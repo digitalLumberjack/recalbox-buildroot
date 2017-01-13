@@ -188,7 +188,7 @@ case "${RECALBOX_TARGET}" in
 	RECALBOXIMG="${RECALBOX_BINARIES_DIR}/recalbox.img"
 	rm -rf "${GENIMAGE_TMP}" || exit 1
 	cp "board/recalbox/grub2/genimage.cfg" "${BINARIES_DIR}" || exit 1
-        cp "${HOST_DIR}/lib/grub/i386-pc/boot.img" "${BINARIES_DIR}" || exit 1
+        cp "${HOST_DIR}/usr/lib/grub/i386-pc/boot.img" "${BINARIES_DIR}" || exit 1
 	genimage --rootpath="${TARGET_DIR}" --inputpath="${BINARIES_DIR}" --outputpath="${RECALBOX_BINARIES_DIR}" --config="${BINARIES_DIR}/genimage.cfg" --tmppath="${GENIMAGE_TMP}" || exit 1
 	rm -f "${RECALBOX_BINARIES_DIR}/boot.vfat" || exit 1
 	sync || exit 1

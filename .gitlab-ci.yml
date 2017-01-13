@@ -155,7 +155,7 @@ release:
   script:
     - echo "releasing on archive.recalbox.com/4.1/"
     - echo "${RECALBOX_ARCHIVE_SSH_KEY}" > recalbox-archive-key && chmod 400 recalbox-archive-key
-    - for arch in `ls dist`; do mkdir -p torelease/$arch/unstable/latest/; mv dist/$arch/* torelease/$arch/unstable/latest/; done
+    - for arch in `ls dist`; do mkdir -p torelease/$arch/unstable/last/; mv dist/$arch/* torelease/$arch/unstable/last/; done
     - docker run --rm -v `pwd`:/share -w /share digitallumberjack/docker-sshd ssh -p 10022 -o StrictHostKeyChecking=no -i recalbox-archive-key $ARCHIVE_SERVER "mkdir -p /recalbox-archive/4.1"
     - docker run --rm -v `pwd`:/share -w /share digitallumberjack/docker-sshd scp -r -P 10022 -o StrictHostKeyChecking=no -i recalbox-archive-key torelease/* $ARCHIVE_SERVER:/recalbox-archive/4.1/
 
@@ -170,7 +170,7 @@ release for test:
   script:
     - echo "releasing on archive.recalbox.com/gitlab/${CI_BUILD_REF_SLUG}"
     - echo "${RECALBOX_ARCHIVE_SSH_KEY}" > recalbox-archive-key && chmod 400 recalbox-archive-key
-    - for arch in `ls dist`; do mkdir -p torelease/$arch/unstable/latest/; mv dist/$arch/* torelease/$arch/unstable/latest/; done
+    - for arch in `ls dist`; do mkdir -p torelease/$arch/unstable/last/; mv dist/$arch/* torelease/$arch/unstable/last/; done
     - docker run --rm -v `pwd`:/share -w /share digitallumberjack/docker-sshd ssh -p 10022 -o StrictHostKeyChecking=no -i recalbox-archive-key $ARCHIVE_SERVER "mkdir -p /recalbox-archive/gitlab/${CI_BUILD_REF_SLUG}"
     - docker run --rm -v `pwd`:/share -w /share digitallumberjack/docker-sshd scp -r -P 10022 -o StrictHostKeyChecking=no -i recalbox-archive-key torelease/* $ARCHIVE_SERVER:/recalbox-archive/gitlab/${CI_BUILD_REF_SLUG}
 
