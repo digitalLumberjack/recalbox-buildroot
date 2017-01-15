@@ -3,11 +3,11 @@
 # GAMBATTE
 #
 ################################################################################
-LIBRETRO_GAMBATTE_VERSION = 803bd7685ebc6dd1263b7a195af4b3ee56b4a3fe
+LIBRETRO_GAMBATTE_VERSION = 6d976512b3d5be509a8ddeb360e8859bcd48f5e5
 LIBRETRO_GAMBATTE_SITE = $(call github,libretro,gambatte-libretro,$(LIBRETRO_GAMBATTE_VERSION))
 
 define LIBRETRO_GAMBATTE_BUILD_CMDS
-	CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" -C $(@D)/libgambatte/ -f Makefile.libretro platform="$(LIBRETRO_PLATFORM)"
+	CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" -C $(@D)/libgambatte/ -f Makefile.libretro platform="$(LIBRETRO_BOARD)"
 endef
 
 define LIBRETRO_GAMBATTE_INSTALL_TARGET_CMDS

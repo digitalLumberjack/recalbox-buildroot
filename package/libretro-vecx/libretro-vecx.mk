@@ -3,11 +3,11 @@
 # VECX
 #
 ################################################################################
-LIBRETRO_VECX_VERSION = e6c8049c0b3e05e52cf7a9fb7b0946ee67a156fb
+LIBRETRO_VECX_VERSION = 38917732bea04d3864b93e76726f0ff887773736
 LIBRETRO_VECX_SITE = $(call github,libretro,libretro-vecx,$(LIBRETRO_VECX_VERSION))
 
 define LIBRETRO_VECX_BUILD_CMDS
-	CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" -C $(@D)/ -f Makefile.libretro platform="$(LIBRETRO_PLATFORM)"
+	CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" -C $(@D)/ -f Makefile.libretro platform="$(LIBRETRO_BOARD)"
 endef
 
 define LIBRETRO_VECX_INSTALL_TARGET_CMDS
