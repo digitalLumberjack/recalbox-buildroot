@@ -4,7 +4,6 @@ MAINTAINER digitalLumberjack <digitallumberjack@recalbox.com>
 ENV TERM xterm
 ENV ARCH ''
 ENV RECALBOX_VERSION_LABEL ''
-ENV RECALBOX_UPDATE_MESSAGE ''
 ENV RECALBOX_CCACHE_DIR ''
 
 # Install dependencies
@@ -23,4 +22,4 @@ RUN locale-gen
 RUN mkdir -p /work
 WORKDIR /work
 
-CMD echo "${RECALBOX_VERSION_LABEL}" > board/recalbox/fsoverlay/recalbox/recalbox.version && echo "${RECALBOX_UPDATE_MESSAGE}" > board/recalbox/fsoverlay/recalbox/recalbox.msg && make recalbox-${ARCH}_defconfig && sed -i "s|BR2_DL_DIR=.*|BR2_DL_DIR=\"/share/dl\"|g" .config && sed -i "s|BR2_HOST_DIR=.*\"|BR2_HOST_DIR=\"/share/host\"|g" .config && $( [ "$RECALBOX_CCACHE_DIR" != "" ] && echo "BR2_CCACHE=y" >> .config && echo "BR2_CCACHE_DIR=\"$RECALBOX_CCACHE_DIR\"" >> .config && echo "BR2_CCACHE_INITIAL_SETUP=\"--max-size=100G\"" >> .config && echo "BR2_CCACHE_USE_BASEDIR=y" >> .config ) || true && make -s
+CMD echo "${RECALBOX_VERSION_LABEL}" > board/recalbox/fsoverlay/recalbox/recalbox.version && make recalbox-${ARCH}_defconfig && sed -i "s|BR2_DL_DIR=.*|BR2_DL_DIR=\"/share/dl\"|g" .config && sed -i "s|BR2_HOST_DIR=.*\"|BR2_HOST_DIR=\"/share/host\"|g" .config && $( [ "$RECALBOX_CCACHE_DIR" != "" ] && echo "BR2_CCACHE=y" >> .config && echo "BR2_CCACHE_DIR=\"$RECALBOX_CCACHE_DIR\"" >> .config && echo "BR2_CCACHE_INITIAL_SETUP=\"--max-size=100G\"" >> .config && echo "BR2_CCACHE_USE_BASEDIR=y" >> .config ) || true && make -s

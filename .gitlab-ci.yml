@@ -8,15 +8,16 @@ stages:
 .build_template: &build_definition
   stage: build
   script:
+    - export RECALBOX_VERSION=${CI_BUILD_TAG:-${CI_BUILD_REF_SLUG}-${ARCH}-build-${CI_BUILD_ID}}
     - docker build -t recalbox-${ARCH} . 
-    - docker run --rm -v `pwd`:/work -v /recalbox-builds/dl:/share/dl -v /recalbox-builds/hosts/host-${ARCH}:/share/host -v /recalbox-builds/ccache:/share/ccache -e "ARCH=$ARCH" -e "RECALBOX_VERSION_LABEL=${CI_BUILD_REF_SLUG}-${ARCH}-build-${CI_BUILD_ID}" -e "RECALBOX_UPDATE_MESSAGE='automatic build ${CI_BUILD_REF_SLUG}-${ARCH}-build-${CI_BUILD_ID}'" -e "RECALBOX_CCACHE_DIR=/share/ccache" recalbox-${ARCH} >> build.log 2>&1
+    - docker run --rm -v `pwd`:/work -v /recalbox-builds/dl:/share/dl -v /recalbox-builds/hosts/host-${ARCH}:/share/host -v /recalbox-builds/ccache:/share/ccache -e "ARCH=$ARCH" -e "RECALBOX_VERSION_LABEL=$RECALBOX_VERSION" -e "RECALBOX_CCACHE_DIR=/share/ccache" recalbox-${ARCH} >> build.log 2>&1
     - tail -n 200 build.log
     - ls output/images/recalbox/
     - mkdir -p dist/${ARCH}
     - cp output/images/recalbox/* dist/${ARCH}
     - for file in `ls dist/${ARCH}/`;do sha1sum dist/${ARCH}/${file} > dist/${ARCH}/${file}.sha1; done
     - tar tf dist/${ARCH}/root.tar.xz | sort > dist/${ARCH}/root.list
-    - echo "${CI_BUILD_REF_SLUG}-${ARCH}-build-${CI_BUILD_ID}" >> dist/${ARCH}/recalbox.version
+    - echo "$RECALBOX_VERSION" >> dist/${ARCH}/recalbox.version
   artifacts:
     name: dist-${ARCH}-${CI_BUILD_ID}
     when: always
@@ -73,15 +74,6 @@ build odroidxu4:
     - tags
   variables:
     ARCH: 'odroidxu4'
-
-release:
-  stage: release
-  only:
-    - master
-    - tags
-  script:
-    - echo "releasing artifacts"
-    - ls
 
 # Pull requests : manual build and deploy
 build rpi1 for test:
@@ -148,37 +140,51 @@ build odroidxu4 for test:
   variables:
     ARCH: 'ordoidxu4'
 
-release:
+.release_template: &release_definition
   stage: release
-  only:
-    - master
   script:
-    - echo "releasing on archive.recalbox.com/4.1/"
+    - echo "releasing on archive.recalbox.com/${RELEASE_DIR}/"
     - echo "${RECALBOX_ARCHIVE_SSH_KEY}" > recalbox-archive-key && chmod 400 recalbox-archive-key
     - for arch in `ls dist`; do mkdir -p torelease/$arch/unstable/last/; mv dist/$arch/* torelease/$arch/unstable/last/; done
-    - docker run --rm -v `pwd`:/share -w /share digitallumberjack/docker-sshd ssh -p 10022 -o StrictHostKeyChecking=no -i recalbox-archive-key $ARCHIVE_SERVER "mkdir -p /recalbox-archive/4.1"
-    - docker run --rm -v `pwd`:/share -w /share digitallumberjack/docker-sshd scp -r -P 10022 -o StrictHostKeyChecking=no -i recalbox-archive-key torelease/* $ARCHIVE_SERVER:/recalbox-archive/4.1/
+    - docker run --rm -v `pwd`:/share -w /share digitallumberjack/docker-sshd ssh -p 10022 -o StrictHostKeyChecking=no -i recalbox-archive-key $ARCHIVE_SERVER "mkdir -p /recalbox-archive/${RELEASE_DIR}"
+    - docker run --rm -v `pwd`:/share -w /share digitallumberjack/docker-sshd scp -r -P 10022 -o StrictHostKeyChecking=no -i recalbox-archive-key torelease/* $ARCHIVE_SERVER:/recalbox-archive/${RELEASE_DIR}/
 
-# Merge requests
+release master:
+  <<: *release_definition
+  only:
+    - master
+  variables:
+    RELEASE_DIR: '4.1'
+    RELEASE_TYPE: 'unstable'
+
+release stable:
+  <<: *release_definition
+  when: manual
+  only:
+    - tags
+  variables:
+    RELEASE_DIR: '4.1'
+    RELEASE_TYPE: 'stable'
+
+
 release for test:
-  stage: release
+  <<: *release_definition
   when: manual
   only:
     - branches
+    - tags
   except:
     - master
-  script:
-    - echo "releasing on archive.recalbox.com/gitlab/${CI_BUILD_REF_SLUG}"
-    - echo "${RECALBOX_ARCHIVE_SSH_KEY}" > recalbox-archive-key && chmod 400 recalbox-archive-key
-    - for arch in `ls dist`; do mkdir -p torelease/$arch/unstable/last/; mv dist/$arch/* torelease/$arch/unstable/last/; done
-    - docker run --rm -v `pwd`:/share -w /share digitallumberjack/docker-sshd ssh -p 10022 -o StrictHostKeyChecking=no -i recalbox-archive-key $ARCHIVE_SERVER "mkdir -p /recalbox-archive/gitlab/${CI_BUILD_REF_SLUG}"
-    - docker run --rm -v `pwd`:/share -w /share digitallumberjack/docker-sshd scp -r -P 10022 -o StrictHostKeyChecking=no -i recalbox-archive-key torelease/* $ARCHIVE_SERVER:/recalbox-archive/gitlab/${CI_BUILD_REF_SLUG}
+  variables:
+    RELEASE_DIR: "gitlab/${CI_BUILD_REF_SLUG}"
+    RELEASE_TYPE: 'unstable'
 
-clean from archive:
+clean tests from archive:
   stage: clean
   when: manual
   only:
     - branches
+    - tags
   except:
     - master
   script:

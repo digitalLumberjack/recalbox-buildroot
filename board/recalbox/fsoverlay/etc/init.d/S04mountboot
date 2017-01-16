@@ -2,6 +2,8 @@
 
 # mount the /boot partition in read only
 
+source /recalbox/scripts/recalbox-includes.sh
+
 case "$1" in
   start)
       BOOTPART=$(/recalbox/scripts/recalbox-part.sh boot)
@@ -9,7 +11,15 @@ case "$1" in
       then
 	  exit 1
       fi
-      mount "${BOOTPART}" /boot -o ro || exit 1
+      # Update /boot/config.txt if needed
+      if test $(shouldUpdate) -ne 0
+      then
+          mount "${BOOTPART}" /boot -o rw || exit 1
+          updateBoot
+          mount -o remount,ro /boot || exit 1
+      else
+          mount "${BOOTPART}" /boot -o ro || exit 1
+      fi
       ;;
   stop)
       umount /boot || exit 1

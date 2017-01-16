@@ -25,6 +25,13 @@ function containsElement {
   return 1
 }
 
+function shouldUpdate {
+  rbxVersion=$_RBX/recalbox.version
+  curVersion=$_SHARE/system/logs/lastrecalbox.conf.update
+  diff -qN "$curVersion" "$rbxVersion" 2>/dev/null && return 1
+  return 0
+}
+
 # Upgrade the recalbox.conf if necessary
 function doRbxConfUpgrade {
   # Update recalbox.conf
@@ -32,7 +39,7 @@ function doRbxConfUpgrade {
   curVersion=$_SHARE/system/logs/lastrecalbox.conf.update
   
   # Check if an update is necessary
-  diff -qN "$curVersion" "$rbxVersion" 2>/dev/null && recallog -e "recalbox.conf already up-to-date" && return 0
+  shouldUpdate && recallog -e "recalbox.conf already up-to-date" && return 0
   
   cfgIn=$_SHAREINIT/system/recalbox.conf
   cfgOut=$_SHARE/system/recalbox.conf
@@ -67,4 +74,9 @@ function doRbxConfUpgrade {
   mv $tmpFile $cfgOut || { recallog -e "ERROR : Couldn't apply the new recalbox.conf" ; return 1 ; }
   cp "$rbxVersion" "$curVersion" || { recallog -e "ERROR : Couldn't set the new recalbox.conf version" ; return 1 ; }
   recallog "UPDATE done !"
+}
+
+
+function updateBoot {
+  sed -i '/^dtparam=/{h;s/=.*/=audio=on/};${x;/^$/{s//dtparam=audio=on/;H};x}' /boot/config.txt
 }

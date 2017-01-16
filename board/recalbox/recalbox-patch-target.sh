@@ -80,3 +80,5 @@ omx_fnt="/usr/share/fonts/dejavu/DejaVuSans-BoldOblique.ttf"
 if [[ -f ${TARGET_DIR}$omx_fnt ]] ; then
 	sed -i "s|omx_fnt=\"\"|omx_fnt=\"--font=$omx_fnt\"|g" "${TARGET_DIR}/etc/init.d/S02splash"
 fi
+# Changelog
+cp "CHANGELOG.md" "${TARGET_DIR}/recalbox/recalbox.changelog"
