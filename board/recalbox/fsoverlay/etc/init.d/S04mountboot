@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # mount the /boot partition in read only
 
@@ -12,7 +12,7 @@ case "$1" in
 	  exit 1
       fi
       # Update /boot/config.txt if needed
-      if test $(shouldUpdate) -ne 0
+      if shouldUpdate
       then
           mount "${BOOTPART}" /boot -o rw || exit 1
           updateBoot
