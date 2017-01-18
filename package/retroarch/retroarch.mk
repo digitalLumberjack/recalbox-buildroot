@@ -7,12 +7,12 @@
 
 
 #RETROARCH_VERSION = 6690711ace3fe146d720d8755528bee8d8d87dd8 
-RETROARCH_VERSION = 31bcb3d6f84b99c93844bde70251bcf3dec9ce7b 
+RETROARCH_VERSION = d7e0a9005b27a9d122825713c1d5be44879b8302
 RETROARCH_SITE = https://github.com/libretro/RetroArch.git
 RETROARCH_SITE_METHOD = git
 RETROARCH_LICENSE = GPLv3+
 RETROARCH_CONF_OPTS += --disable-oss --enable-zlib
-RETROARCH_DEPENDENCIES = host-pkgconf
+RETROARCH_DEPENDENCIES = host-pkgconf recalbox-system
 
 ifeq ($(BR2_PACKAGE_SDL2),y)
 	RETROARCH_CONF_OPTS += --enable-sdl2
@@ -47,7 +47,7 @@ endif
 
 # x86 : no option
 
-RETROARCH_CONF_OPTS += --enable-networking --enable-netplay
+RETROARCH_CONF_OPTS += --enable-networking
 
 ifeq ($(BR2_PACKAGE_PYTHON3),y)
 RETROARCH_CONF_OPTS += --enable-python
@@ -78,10 +78,10 @@ RETROARCH_CONF_OPTS += --disable-pulse
 endif
 
 ifeq ($(BR2_PACKAGE_HAS_LIBGLES),y)
-RETROARCH_CONF_OPTS += --enable-gles
+RETROARCH_CONF_OPTS += --enable-opengles
 RETROARCH_DEPENDENCIES += libgles
 else
-RETROARCH_CONF_OPTS += --disable-gles
+RETROARCH_CONF_OPTS += --disable-opengles
 endif
 
 ifeq ($(BR2_PACKAGE_HAS_LIBEGL),y)
@@ -127,7 +127,7 @@ endef
 
 ifeq ($(BR2_PACKAGE_MALI_OPENGLES_SDK),y)
 	RETROARCH_PRE_CONFIGURE_HOOKS += RETROARCH_MALI_FIXUP
-	RETROARCH_CONF_OPTS += --enable-gles --enable-mali_fbdev
+	RETROARCH_CONF_OPTS += --enable-opengles --enable-mali_fbdev
 endif
 
 define RETROARCH_CONFIGURE_CMDS
@@ -189,4 +189,12 @@ endif
 
 ifeq ($(BR2_ARM_CPU_HAS_NEON),y)
         LIBRETRO_PLATFORM += neon
+endif
+
+# SPECIFIC PLATFORM
+# Will be equal to rpi1, rpi2, rpi3 if we are on rpi.
+# Will be equal to LIBRETRO_PLATFORM otherwise
+LIBRETRO_BOARD=$(LIBRETRO_PLATFORM)
+ifneq (,$(findstring rpi,$(RECALBOX_SYSTEM_VERSION)))
+	LIBRETRO_BOARD=$(RECALBOX_SYSTEM_VERSION)
 endif

@@ -16,7 +16,12 @@ _SHARE=$_RBX/share
 #
 ## Functions
 #
-
+function shouldUpdate {
+  rbxVersion=$_RBX/recalbox.version
+  curVersion=$_SHARE/system/logs/lastrecalbox.conf.update
+  diff -qN "$curVersion" "$rbxVersion" 2>/dev/null && return 0
+  return 1
+}
 # Checks if $1 exists in the array passed for $2
 function containsElement {
   # local e
@@ -25,12 +30,6 @@ function containsElement {
   return 1
 }
 
-function shouldUpdate {
-  rbxVersion=$_RBX/recalbox.version
-  curVersion=$_SHARE/system/logs/lastrecalbox.conf.update
-  diff -qN "$curVersion" "$rbxVersion" 2>/dev/null && return 1
-  return 0
-}
 
 # Upgrade the recalbox.conf if necessary
 function doRbxConfUpgrade {
@@ -39,8 +38,9 @@ function doRbxConfUpgrade {
   curVersion=$_SHARE/system/logs/lastrecalbox.conf.update
   
   # Check if an update is necessary
-  shouldUpdate && recallog -e "recalbox.conf already up-to-date" && return 0
-  
+  if ! shouldUpdate;then 
+    recallog -e "recalbox.conf already up-to-date" && return 0
+  fi 
   cfgIn=$_SHAREINIT/system/recalbox.conf
   cfgOut=$_SHARE/system/recalbox.conf
   forced=(controllers.ps3.driver) # Used as a regex, need to escape .
@@ -57,7 +57,7 @@ function doRbxConfUpgrade {
       recallog "FORCING : $name=$value"
       continue
     fi
-    
+
     # Check if the property exists or has to be added
     if grep -qE "^[;]?$name=" $cfgIn; then
       recallog "ADDING user defined to $cfgOut : $name=$value"
@@ -66,7 +66,7 @@ function doRbxConfUpgrade {
       recallog "ADDING custom property to $cfgOut : $name=$value"
       echo "$name=$value" >> $tmpFile || { recallog "ERROR : Couldn't write $name=$value in $tmpFile" ; return 1 ; }
     fi
-    
+
   done < <(grep -E "^[[:alnum:]\-]+\.[[:alnum:].\-]+=[[:print:]]+$" $cfgOut)
   
   cp $cfgOut $savefile || { recallog -e "ERROR : Couldn't backup $cfgOut to $savefile" ; return 1 ; }
@@ -77,6 +77,3 @@ function doRbxConfUpgrade {
 }
 
 
-function updateBoot {
-  sed -i '/^dtparam=/{h;s/=.*/=audio=on/};${x;/^$/{s//dtparam=audio=on/;H};x}' /boot/config.txt
-}
