@@ -195,6 +195,9 @@ endif
 # Will be equal to rpi1, rpi2, rpi3 if we are on rpi.
 # Will be equal to LIBRETRO_PLATFORM otherwise
 LIBRETRO_BOARD=$(LIBRETRO_PLATFORM)
-ifneq (,$(findstring rpi,$(RECALBOX_SYSTEM_VERSION)))
+ifeq ($(RECALBOX_SYSTEM_VERSION)),rpi2)
+	LIBRETRO_BOARD=$(RECALBOX_SYSTEM_VERSION)
+endif
+ifeq ($(RECALBOX_SYSTEM_VERSION)),rpi3)
 	LIBRETRO_BOARD=$(RECALBOX_SYSTEM_VERSION)
 endif
