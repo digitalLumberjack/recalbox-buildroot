@@ -85,6 +85,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Synced with buildroot 2016.11 
 - Added GNU diffutils
 - Now shows changelog when updating the system
+- Patched xpad driver to support Xbox One S / Elite controllers in USB mode
+- Patched xpad driver to fix the blinking xbox leds
 
 ## [4.0.0-beta5] - 2016-08-13hs the ratio issue in mame.
 - Improved pads and gpio support for moonlight
