@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_LUTRO
+	bool "recalbox-romfs-lutro"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_LUTRO
+	help
+	  share_init/roms and xml for lutro

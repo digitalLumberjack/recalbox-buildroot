@@ -1,0 +1,9 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_NEOGEO
+	bool "recalbox-romfs-neogeo"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_MAME2003 \
+	  || BR2_PACKAGE_LIBRETRO_IMAME \
+	  || BR2_PACKAGE_LIBRETRO_FBA \
+	  || BR2_PACKAGE_PIFBA
+	help
+	  share_init/roms and xml for neogeo

@@ -1,0 +1,8 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_SNES
+	bool "recalbox-romfs-snes"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_CATSFC \
+	  || BR2_PACKAGE_LIBRETRO_POCKETSNES \
+	  || BR2_PACKAGE_LIBRETRO_SNES9X_NEXT
+	help
+	  share_init/roms and xml for snes

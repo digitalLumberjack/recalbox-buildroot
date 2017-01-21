@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_NGP
+	bool "recalbox-romfs-ngp"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_BEETLE_NGP
+	help
+	  share_init/roms and xml for ngp

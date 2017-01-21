@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_SEGA32X
+	bool "recalbox-romfs-sega32x"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_PICODRIVE
+	help
+	  share_init/roms and xml for sega32x

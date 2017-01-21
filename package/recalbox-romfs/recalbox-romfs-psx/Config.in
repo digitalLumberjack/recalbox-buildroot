@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_PSX
+	bool "recalbox-romfs-psx"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_PCSX
+	help
+	  share_init/roms and xml for psx

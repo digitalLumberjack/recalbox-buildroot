@@ -8,6 +8,7 @@ config BR2_PACKAGE_LINAPPLE_PIE
 	depends on BR2_PACKAGE_CURL
 	depends on BR2_PACKAGE_ZLIB
 	depends on BR2_PACKAGE_LIBZIP
+	select BR2_PACKAGE_RECALBOX_ROMFS_APPLE2
 	help
 	  Linapple on Raspberry Pi
 	  Great thanks to Mark Ormond for fine tuning LinApple and 

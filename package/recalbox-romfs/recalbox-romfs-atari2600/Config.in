@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_ATARI2600
+	bool "recalbox-romfs-atari2600"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_STELLA
+	help
+	  share_init/roms and xml for atari2600

@@ -1,0 +1,8 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_GBA
+	bool "recalbox-romfs-gba"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_GPSP \
+	  || BR2_PACKAGE_LIBRETRO_MGBA \
+	  || BR2_PACKAGE_LIBRETRO_METEOR
+	help
+	  share_init/roms and xml for gba

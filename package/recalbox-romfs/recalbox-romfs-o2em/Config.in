@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_O2EM
+	bool "recalbox-romfs-o2em"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_O2EM
+	help
+	  share_init/roms and xml for o2em

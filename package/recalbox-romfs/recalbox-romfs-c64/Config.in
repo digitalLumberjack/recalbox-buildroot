@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_C64
+	bool "recalbox-romfs-c64"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_VICE
+	help
+	  share_init/roms and xml for c64

@@ -2,6 +2,7 @@ config BR2_PACKAGE_LIBRETRO_QUICKNES
         bool "libretro-quicknes"
 	depends on BR2_PACKAGE_RETROARCH
 	depends on BR2_INSTALL_LIBSTDCPP
+	select BR2_PACKAGE_RECALBOX_ROMFS_NES
         help
           A libretro NES emulator core for ARM.
 

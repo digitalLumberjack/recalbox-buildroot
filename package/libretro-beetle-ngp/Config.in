@@ -2,6 +2,8 @@ config BR2_PACKAGE_LIBRETRO_BEETLE_NGP
         bool "libretro-beetle-ngp"
 	depends on BR2_PACKAGE_RETROARCH
 	depends on BR2_INSTALL_LIBSTDCPP
+	select BR2_PACKAGE_RECALBOX_ROMFS_NGP
+	select BR2_PACKAGE_RECALBOX_ROMFS_NGPC
         help
           A libretro NGP emulator core for ARM.
 

@@ -2,6 +2,7 @@ config BR2_PACKAGE_LIBRETRO_STELLA
         bool "libretro-stella"
 	depends on BR2_PACKAGE_RETROARCH
 	depends on BR2_INSTALL_LIBSTDCPP
+	select BR2_PACKAGE_RECALBOX_ROMFS_ATARI2600
         help
           A libretro Atari 2600 emulator core for ARM.
 
