@@ -2,7 +2,7 @@ config BR2_PACKAGE_LIBRETRO_POCKETSNES
         bool "libretro-pocketsnes"
 	depends on BR2_PACKAGE_RETROARCH
 	depends on BR2_INSTALL_LIBSTDCPP
-	select BR2_PACKAGE_RECALBOX_ROMFS_SNE
+	select BR2_PACKAGE_RECALBOX_ROMFS_SNES
         help
           A libretro SNES emulator core for ARM.
 
