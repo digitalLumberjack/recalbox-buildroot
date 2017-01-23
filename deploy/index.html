@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A layout example that shows off a blog page with a list of posts.">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-"
+          crossorigin="anonymous">
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/grids-responsive-min.css">
+    <!--<![endif]-->
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="css/layouts/blog-old-ie.css">
+    <![endif]-->a
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="css/layouts/blog.css">
+    <!--<![endif]-->
+
+    <title>recalbox build ${CI_BUILD_REF_NAME}</title>
+    <style>
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(61, 146, 201);
+        }
+
+        a:hover,
+        a:focus {
+            text-decoration: underline;
+        }
+
+        h3 {
+            font-weight: 100;
+        }
+
+        /* LAYOUT CSS */
+        .pure-img-responsive {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #layout {
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            top: auto;
+            margin: 3em auto;
+        }
+
+        .sidebar {
+            background: rgb(61, 79, 93);
+            color: #fff;
+        }
+
+        .brand-title,
+        .brand-tagline {
+            margin: 0;
+        }
+
+        .brand-title {
+            text-transform: uppercase;
+        }
+
+        .brand-tagline {
+            font-weight: 300;
+            color: rgb(176, 202, 219);
+        }
+
+        .nav-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-item {
+            display: inline-block;
+            *display: inline;
+            zoom: 1;
+        }
+
+        .nav-item a {
+            background: transparent;
+            border: 2px solid rgb(176, 202, 219);
+            color: #fff;
+            margin-top: 1em;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 85%;
+        }
+
+        .nav-item a:hover,
+        .nav-item a:focus {
+            border: 2px solid rgb(61, 146, 201);
+            text-decoration: none;
+        }
+
+        .content-subhead {
+            text-transform: uppercase;
+            color: #aaa;
+            border-bottom: 1px solid #eee;
+            padding: 0.4em 0;
+            font-size: 80%;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+        }
+
+        .content {
+            padding: 2em 1em 0;
+        }
+
+        .post {
+            padding-bottom: 2em;
+        }
+
+        .post-title {
+            font-size: 2em;
+            color: #222;
+            margin-bottom: 0.2em;
+        }
+
+        .post-avatar {
+            border-radius: 50px;
+            float: right;
+            margin-left: 1em;
+        }
+
+        .post-description {
+            font-family: Georgia, "Cambria", serif;
+            color: #444;
+            line-height: 1.8em;
+        }
+
+        .post-meta {
+            color: #999;
+            font-size: 90%;
+            margin: 0;
+        }
+
+        .post-category {
+            margin: 0 0.1em;
+            padding: 0.3em 1em;
+            color: #fff;
+            background: #999;
+            font-size: 80%;
+        }
+
+        .post-category-design {
+            background: #5aba59;
+        }
+
+        .post-category-pure {
+            background: #4d85d1;
+        }
+
+        .post-category-yui {
+            background: #8156a7;
+        }
+
+        .post-category-js {
+            background: #df2d4f;
+        }
+
+        .post-images {
+            margin: 1em 0;
+        }
+
+        .post-image-meta {
+            margin-top: -3.5em;
+            margin-left: 1em;
+            color: #fff;
+            text-shadow: 0 1px 1px #333;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        .footer a {
+            color: #ccc;
+            font-size: 80%;
+        }
+
+        .footer .pure-menu a:hover,
+        .footer .pure-menu a:focus {
+            background: none;
+        }
+
+        @media (min-width: 48em) {
+            .content {
+                padding: 2em 3em 0;
+                margin-left: 25%;
+            }
+
+            .header {
+                margin: 80% 2em 0;
+                text-align: right;
+            }
+
+            .sidebar {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="header">
+            <h1 class="brand-title">recalbox</h1>
+            <h2 class="brand-tagline">release page</h2>
+
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a class="pure-button" href="https://github.com/recalbox">github</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" href="https://www.recalbox.com">recalbox.com</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            <!-- A wrapper for all the blog posts -->
+            <div class="posts">
+                <h1 class="content-subhead">build details</h1>
+
+                <!-- A single blog post -->
+                <section class="post">
+                    <header class="post-header">
+                        <img width="48" height="48" alt="recalbox" class="post-avatar"
+                             src="https://gitlab.com/uploads/user/avatar/GITLAB_USER_ID/avatar.png">
+
+                        <h2 class="post-title">${CI_BUILD_REF_NAME}</h2>
+
+                        <p class="post-meta">
+                            By <a href="#" class="post-author">${GITLAB_USER_EMAIL}</a>
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>Build <a href="https://gitlab.com/recalbox/recalbox-buildroot/builds/${CI_BUILD_ID}">${CI_BUILD_ID}</a>
+                            from pipeline ${CI_PIPELINE_ID} based on ${CI_BUILD_REF_NAME}</h1>
+                        </p>
+                        <p>Use dd on linux or <a
+                                href="https://sourceforge.net/projects/win32diskimager/">win32diskimage</a> on an alternative os to burn the
+                            .img</p>
+                        <p>
+                            The system image (.img file) will not be available for review builds based on merge requests
+                        </p>
+                        <table class="pure-table pure-table-striped">
+                            <thead>
+                            <tr>
+                                <th>Architecture</th>
+                                <th>Tag</th>
+                                <th>Boot archive</th>
+                                <th>Root archive</th>
+                                <th>Burnable Image</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr class="pure-table-odd">
+                                <td>The board or arch you need</td>
+                                <td>arch tag</td>
+                                <td>The boot partition files</td>
+                                <td>The root partition files</td>
+                                <td>The system image</td>
+                            </tr>
+
+                            <tr>
+                                <td>Raspberry Pi 1</td>
+                                <td>rpi1</td>
+                                <td><a href="rpi1/unstable/last/boot.tar.xz">boot.tar.xz</a> <a href="rpi1/unstable/last/boot.tar.xz.sha1">(sha1)</a></td>
+                                <td><a href="rpi1/unstable/last/root.tar.xz">root.tar.xz</a> <a href="rpi1/unstable/last/root.tar.xz.sha1">(sha1)</a></td>
+                                <td><a href="rpi1/unstable/last/recalbox.img">recalbox.img</a> <a href="rpi1/unstable/last/recalbox.img.sha1">(sha1)</a></td>
+                            </tr>
+                            <tr>
+                                <td>Raspberry Pi 2</td>
+                                <td>rpi2</td>
+                                <td><a href="rpi2/unstable/last/boot.tar.xz">boot.tar.xz</a> <a href="rpi2/unstable/last/boot.tar.xz.sha1">(sha1)</a></td>
+                                <td><a href="rpi2/unstable/last/root.tar.xz">root.tar.xz</a> <a href="rpi2/unstable/last/root.tar.xz.sha1">(sha1)</a></td>
+                                <td><a href="rpi2/unstable/last/recalbox.img">recalbox.img</a> <a href="rpi2/unstable/last/recalbox.img.sha1">(sha1)</a></td>
+                            </tr>
+                            <tr>
+                                <td>Raspberry Pi 3</td>
+                                <td>rpi3</td>
+                                <td><a href="rpi3/unstable/last/boot.tar.xz">boot.tar.xz</a> <a href="rpi3/unstable/last/boot.tar.xz.sha1">(sha1)</a></td>
+                                <td><a href="rpi3/unstable/last/root.tar.xz">root.tar.xz</a> <a href="rpi3/unstable/last/root.tar.xz.sha1">(sha1)</a></td>
+                                <td><a href="rpi3/unstable/last/recalbox.img">recalbox.img</a> <a href="rpi3/unstable/last/recalbox.img.sha1">(sha1)</a></td>
+                            </tr>
+                            <tr>
+                                <td>PC 64 bits</td>
+                                <td>x86_64</td>
+                                <td><a href="x86_64/unstable/last/boot.tar.xz">boot.tar.xz</a> <a href="x86_64/unstable/last/boot.tar.xz.sha1">(sha1)</a></td>
+                                <td><a href="x86_64/unstable/last/root.tar.xz">root.tar.xz</a> <a href="x86_64/unstable/last/root.tar.xz.sha1">(sha1)</a></td>
+                                <td><a href="x86_64/unstable/last/recalbox.img">recalbox.img</a> <a href="x86_64/unstable/last/recalbox.img.sha1">(sha1)</a></td>
+                            </tr>
+                            <tr>
+                                <td>PC 32 bits</td>
+                                <td>x86</td>
+                                <td><a href="x86/unstable/last/boot.tar.xz">boot.tar.xz</a> <a href="x86/unstable/last/boot.tar.xz.sha1">(sha1)</a></td>
+                                <td><a href="x86/unstable/last/root.tar.xz">root.tar.xz</a> <a href="x86/unstable/last/root.tar.xz.sha1">(sha1)</a></td>
+                                <td><a href="x86/unstable/last/recalbox.img">recalbox.img</a> <a href="x86/unstable/last/recalbox.img.sha1">(sha1)</a></td>
+                            </tr>
+                            <tr>
+                                <td>Odroid XU4</td>
+                                <td>odroidxu4</td>
+                                <td><a href="odroidxu4/unstable/last/boot.tar.xz">boot.tar.xz</a> <a href="odroidxu4/unstable/last/boot.tar.xz.sha1">(sha1)</a></td>
+                                <td><a href="odroidxu4/unstable/last/root.tar.xz">root.tar.xz</a> <a href="odroidxu4/unstable/last/root.tar.xz.sha1">(sha1)</a></td>
+                                <td><a href="odroidxu4/unstable/last/recalbox.img">recalbox.img</a> <a href="odroidxu4/unstable/last/recalbox.img".sha1>(sha1)</a></td>
+                            </tr>
+                            <tr>
+                                <td>Odroid C2</td>
+                                <td>odroidxc2</td>
+                                <td><a href="odroidxc2/unstable/last/boot.tar.xz">boot.tar.xz</a> <a href="odroidxc2/unstable/last/boot.tar.xz.sha1">(sha1)</a></td>
+                                <td><a href="odroidxc2/unstable/last/root.tar.xz">root.tar.xz</a> <a href="odroidxc2/unstable/last/root.tar.xz.sha1">(sha1)</a></td>
+                                <td><a href="odroidxc2/unstable/last/recalbox.img">recalbox.img</a> <a href="odroidxc2/unstable/last/recalbox.img.sha1">(sha1)</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

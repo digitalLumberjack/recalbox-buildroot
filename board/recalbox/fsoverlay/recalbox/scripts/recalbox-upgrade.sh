@@ -63,7 +63,8 @@ function cleanBeforeExit {
   rm -rf /recalbox/share/system/upgrade/*
   exit $1
 }
-files="boot.tar.xz root.tar.xz"
+
+files="boot.tar.xz root.tar.xz boot.tar.xz.sha1 root.tar.xz.sha1 root.list"
 for file in $files; do
   url="${recalboxupdateurl}/${majorversion}/${arch}/${updatetype}/last/${file}"
   if ! curl -fs "${url}" -o "/recalbox/share/system/upgrade/${file}";then
@@ -73,5 +74,16 @@ for file in $files; do
   recallog "${url} downloaded"
 done
 
-recallog -e "All files downloaded, ready for upgrade on next reboot"
+# Verify checksums
+filesToCheck="boot.tar.xz root.tar.xz"
+for file in $filesToCheck; do
+  computedSum=`sha1sum /recalbox/share/system/upgrade/${file} | cut -d ' ' -f 1`
+  buildSum=`cat /recalbox/share/system/upgrade/${file}.sha1 | cut -d ' ' -f 1`
+  if [[ $computedSum != $buildSum ]]; then
+    recallog -e "Checksums differ for ${file}. Aborting upgrade !"
+    cleanBeforeExit 8
+  fi
+done
+
+recallog -e "All files downloaded and checked, ready for upgrade on next reboot"
 exit 0

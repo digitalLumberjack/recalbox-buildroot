@@ -18,14 +18,13 @@ case "$1" in
       then
 	  exit 1
       fi
+      mount -o ro /boot || exit 1
       # Update /boot/config.txt if needed
       if shouldUpdate
       then
-          mount "${BOOTPART}" /boot -o rw || exit 1
+          mount "${BOOTPART}" /boot -o remount,rw || exit 1
           updateBoot
           mount -o remount,ro /boot || exit 1
-      else
-          mount "${BOOTPART}" /boot -o ro || exit 1
       fi
       ;;
   stop)
