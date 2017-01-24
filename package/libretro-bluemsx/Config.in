@@ -2,6 +2,10 @@ config BR2_PACKAGE_LIBRETRO_BLUEMSX
         bool "libretro-bluemsx"
 	depends on BR2_PACKAGE_RETROARCH
 	depends on BR2_INSTALL_LIBSTDCPP
+	select BR2_PACKAGE_RECALBOX_ROMFS_COLECOVISION
+	select BR2_PACKAGE_RECALBOX_ROMFS_MSX
+	select BR2_PACKAGE_RECALBOX_ROMFS_MSX1
+	select BR2_PACKAGE_RECALBOX_ROMFS_MSX2
         help
           A libretro MSX / ColecoVision emulator core for ARM.
 

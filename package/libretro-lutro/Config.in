@@ -2,6 +2,7 @@ config BR2_PACKAGE_LIBRETRO_LUTRO
         bool "libretro-lutro"
 	depends on BR2_PACKAGE_RETROARCH
 	depends on BR2_INSTALL_LIBSTDCPP
+	select BR2_PACKAGE_RECALBOX_ROMFS_LUTRO
         help
           An experimental lua game framework for libretro.
 

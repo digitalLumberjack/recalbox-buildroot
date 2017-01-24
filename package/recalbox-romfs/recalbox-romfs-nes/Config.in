@@ -1,0 +1,9 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_NES
+	bool "recalbox-romfs-nes"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_FCEUMM \
+	  || BR2_PACKAGE_LIBRETRO_FCEUNEXT \
+	  || BR2_PACKAGE_LIBRETRO_NESTOPIA \
+	  || BR2_PACKAGE_LIBRETRO_QUICKNES
+	help
+	  share_init/roms and xml for nes

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_LYNX
+	bool "recalbox-romfs-lynx"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_BEETLE_LYNX
+	help
+	  share_init/roms and xml for lynx

@@ -2,6 +2,7 @@ config BR2_PACKAGE_LIBRETRO_PROSYSTEM
         bool "libretro-prosystem"
 	depends on BR2_PACKAGE_RETROARCH
 	depends on BR2_INSTALL_LIBSTDCPP
+	select BR2_PACKAGE_RECALBOX_ROMFS_ATARI7800
         help
           A libretro ATARI 7800 emulator for ARM.
 

@@ -2,6 +2,8 @@ config BR2_PACKAGE_LIBRETRO_GAMBATTE
         bool "libretro-gambatte"
 	depends on BR2_PACKAGE_RETROARCH
 	depends on BR2_INSTALL_LIBSTDCPP
+	select BR2_PACKAGE_RECALBOX_ROMFS_GB
+	select BR2_PACKAGE_RECALBOX_ROMFS_GBC
         help
           A libretro GAMEBOY emulator core for ARM.
 

@@ -11,5 +11,7 @@ config BR2_PACKAGE_DOLPHIN_EMU
 	select BR2_PACKAGE_LIBCURL
 	select BR2_PACKAGE_SFML
 	select BR2_PACKAGE_BLUEZ5_UTILS
+	select BR2_PACKAGE_RECALBOX_ROMFS_GAMECUBE
+	select BR2_PACKAGE_RECALBOX_ROMFS_WII
         help
           A  gamecube/wii emulator

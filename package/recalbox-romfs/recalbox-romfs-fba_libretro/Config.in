@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_FBA_LIBRETRO
+	bool "recalbox-romfs-fba_libretro"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_FBA
+	help
+	  share_init/roms and xml for fba_libretro

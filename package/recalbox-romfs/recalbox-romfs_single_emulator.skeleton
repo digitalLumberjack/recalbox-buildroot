@@ -1,0 +1,40 @@
+################################################################################
+#
+# recalbox-romfs-%SYSTEM_LOWER%
+#
+################################################################################
+
+# Package generated with :
+# %COMMAND_LINE%
+
+# Name the 3 vars as the package requires
+RECALBOX_ROMFS_%SYSTEM_UPPER%_SOURCE = 
+RECALBOX_ROMFS_%SYSTEM_UPPER%_SITE = 
+RECALBOX_ROMFS_%SYSTEM_UPPER%_INSTALL_STAGING = NO
+# Set the system name
+SYSTEM_NAME_%SYSTEM_UPPER% = %SYSTEM_LOWER%
+SYSTEM_XML_%SYSTEM_UPPER% = $(@D)/$(SYSTEM_NAME_%SYSTEM_UPPER%).xml
+# System rom path
+SOURCE_ROMDIR_%SYSTEM_UPPER% = $(RECALBOX_ROMFS_%SYSTEM_UPPER%_PKGDIR)/roms
+
+# CONFIGGEN_STD_CMD is defined in recalbox-romfs, so take good care that
+# variables are global across buildroot
+
+
+ifeq ($(%BR2_PACKAGE_NAME%),y)
+define CONFIGURE_%SYSTEM_UPPER%
+	echo -e '<system>\n' \
+	'\t<fullname>%FULLNAME%</fullname>\n' \
+	"\t<name>$(SYSTEM_NAME_%SYSTEM_UPPER%)</name>\n" \
+	'\t<path>/recalbox/share/roms/$(SYSTEM_NAME_%SYSTEM_UPPER%)</path>\n' \
+	'\t<extension>%SYSTEM_EXTENSIONS%</extension>\n' \
+	"\t<command>$(CONFIGGEN_STD_CMD)</command>\n" \
+	'\t<platform>%PLATFORM%</platform>\n' \
+	'\t<theme>%THEME%</theme>\n' \
+	'</system>' > $(SYSTEM_XML_%SYSTEM_UPPER%)
+	cp -R $(SOURCE_ROMDIR_%SYSTEM_UPPER%) $(@D)
+endef
+RECALBOX_ROMFS_%SYSTEM_UPPER%_CONFIGURE_CMDS += $(CONFIGURE_%SYSTEM_UPPER%)
+endif
+
+$(eval $(generic-package))
