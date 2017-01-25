@@ -269,13 +269,18 @@ fi
 
 if [ "$command" == "volume" ];then
 	if [ "$mode" != "" ];then
-        	echo "`logtime` : setting audio volume : $mode" >> $log
-
+		echo "`logtime` : setting audio volume : $mode" >> $log
+		
+		if ( amixer scontrols | grep -q 'Master' ); then
 		# on my pc, the master is turned off at boot
 		# i don't know what are the rules to set here.
-		amixer set Master unmute      || exit 1
-                amixer set Master -- ${mode}% || exit 1
-		amixer set PCM    -- ${mode}% || exit 1
+			amixer set Master unmute      || exit 1
+			amixer set Master -- ${mode}% || exit 1
+		fi
+		if ( amixer scontrols | grep -q 'PCM' ); then
+			amixer set PCM    -- ${mode}% || exit 1
+		fi
+		# Odroids have no sound controller. Too bad, exit 0 anyway
 		exit 0
 	fi
 	exit 12

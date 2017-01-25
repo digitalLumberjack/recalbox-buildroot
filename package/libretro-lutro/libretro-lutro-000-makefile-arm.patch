@@ -1,13 +1,15 @@
---- a/Makefile	2015-07-03 17:27:33.073342243 +0200
-+++ b/Makefile	2015-07-03 17:34:00.917327652 +0200
-@@ -107,6 +107,33 @@
- 	AR = psp-ar$(EXE_EXT)
-    STATIC_LINKING = 1
- 	FLAGS += -G0 -DLSB_FIRST
+--- a/Makefile	2016-07-26 08:57:48.949430075 +0200
++++ b/Makefile	2016-07-26 09:16:20.325450940 +0200
+@@ -184,6 +184,35 @@
+    LUA_MYCFLAGS := $(DEFINES) $(CFLAGS)
+ 	STATIC_LINKING = 1
+    MMD :=
++
++#ARM
 +else ifneq (,$(findstring armv,$(platform)))
 +   TARGET := $(TARGET_NAME)_libretro.so
-+   SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
-+   fpic := -fPIC -fsigned-char
++   SHARED := -shared -Wl,--no-undefined
++   fpic := -fPIC
 +   CFLAGS += -D_GNU_SOURCE=1
 +   CC = gcc
 +ifneq (,$(findstring cortexa8,$(platform)))
@@ -32,5 +34,5 @@
 +endif
 +   CFLAGS += -DARM
  else
-    TARGET := $(TARGET_NAME)_libretro.dll
     CC = gcc
+    TARGET := $(TARGET_NAME)_libretro.dll

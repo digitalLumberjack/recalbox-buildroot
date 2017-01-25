@@ -1,0 +1,5 @@
+config BR2_PACKAGE_RGB_PI
+	bool "rgb-pi"
+	depends on BR2_PACKAGE_RPI_FIRMWARE
+	help
+	  A DTBO combining VGA 565 and PWM audio

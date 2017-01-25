@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unrelease][unreleased]
+- add rgb-pi overlay
 - checksum on upgrades, progression percentage much more accurate
 - Bump to Bump rpi-userland 8e84b9003d8259472f9c79b385443b1b4975203e and rpi-firmware b365edad4e75126fb9bfee2325652758407e4f74 to change be able to change video résolution on the fly via the vcgencmd command. This will be very useful the get pixel perfect on rgb screen
 - Fixing BT firmware copy for Realtek BT devices (81xx 87xx and 88xx)
@@ -87,9 +88,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Synced with buildroot 2016.11 
 - Added GNU diffutils
 - Now shows changelog when updating the system
+- Added snes9x libretro core (MSU-1 support)
 - Patched xpad driver to support Xbox One S / Elite controllers in USB mode
 - Patched xpad driver to fix the blinking xbox leds
 - Build on gitlab ci
+- Bumped libretro cores on last version
 - Added system.es.hidesystemview option in recalbox.conf to hide system view
 - Added system.es.selectedsystem option in recalbox.conf to select a system on boot
 - Added system.es.bootongamelist to boot on the system gamelist
