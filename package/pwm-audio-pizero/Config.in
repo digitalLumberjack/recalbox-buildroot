@@ -1,0 +1,5 @@
+config BR2_PACKAGE_PWM_AUDIO_PIZERO
+	bool "pwm-audio-pizero"
+	depends on BR2_PACKAGE_RPI_FIRMWARE
+	help
+	  A DTBO to redirect pizero pwm on externel GPIO Pinout to get sound
