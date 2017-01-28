@@ -1,0 +1,74 @@
+################################################################################
+#
+#advancemame
+#
+################################################################################
+
+#latest
+#ADVANCEMAME_VERSION = 339eab5a4b19a614b53efee2d62015c758694a4f
+#ADVANCEMAME_SITE = $(call github,amadvance,advancemame,$(ADVANCEMAME_VERSION))
+
+#stable
+#https://github.com/amadvance/advancemame/archive/advancemame-1.4.tar.gz
+ADVANCEMAME_VERSION = 1.4
+ADVANCEMAME_SOURCE = advancemame-$(ADVANCEMAME_VERSION).tar.gz
+ADVANCEMAME_SITE = https://github.com/amadvance/advancemame/archive
+ADVANCEMAME_INSTALL_STAGING = YES
+ADVANCEMAME_INSTALL_TARGET = YES
+#ADVANCEMAME_CONF_OPTS += --enable-shared
+
+ADVANCEMAME_DEPENDENCIES += rpi-userland sdl zlib libpng libogg libvorbis sdl_sound
+
+#ADVANCEMAME_AUTORECONF = YES
+# we're patching configure.in, but package cannot autoreconf with our version of
+# autotools, so we have to do it manually instead of setting SDL_AUTORECONF = YES
+#define ADVANCEMAME_RUN_AUTOGEN
+#	cd $(@D) && PATH=$(BR_PATH) ./autogen.sh
+#endef
+
+#ADVANCEMAME_PRE_CONFIGURE_HOOKS += ADVANCEMAME_RUN_AUTOGEN
+
+ADVANCEMAME_LDFLAGS = -L$(STAGING_DIR)/usr/lib
+#ADVANCEMAME_CFLAGS = -I$(STAGING_DIR)/usr/include -I$(STAGING_DIR)/usr/include/SDL2 -I$(STAGING_DIR)/usr/include/SDL
+ADVANCEMAME_CFLAGS = -I$(STAGING_DIR)/usr/include -I$(STAGING_DIR)/usr/include/SDL
+
+define ADVANCEMAME_CONFIGURE_CMDS
+        (cd $(@D); ./autogen.sh; \
+        $(TARGET_CONFIGURE_ARGS) \
+                $(TARGET_CONFIGURE_OPTS) \
+                CFLAGS="$(TARGET_CFLAGS) $(ADVANCEMAME_CFLAGS)" \
+                CXXFLAGS="$(TARGET_CXXFLAGS) $(ADVANCEMAME_CFLAGS)" \
+                CPPFLAGS="$(TARGET_CPPFLAGS) $(ADVANCEMAME_CFLAGS)" \
+                LDFLAGS="$(TARGET_LDFLAGS) $(ADVANCEMAME_LDFLAGS)" \
+                CROSS_COMPILE="$(HOST_DIR)/usr/bin/" \
+		LIBS="-lvorbisfile -lvorbis -logg" \
+                ./configure --host=arm-buildroot-linux-gnueabihf \
+                --enable-core-inline --prefix=/usr \
+                --enable-dynrec --enable-unaligned_memory \
+                --disable-opengl --with-sdl=sdl \
+                --with-sdl-prefix="$(STAGING_DIR)/usr" \
+        )
+endef
+
+
+
+#ADVANCEMAME_DEPENDENCIES += host-automake host-autoconf host-libtool
+#HOST_ADVANCEMAME_DEPENDENCIES += host-automake host-autoconf host-libtool
+
+
+#define RPI_FBCP_CROSS_FIXUP
+#        $(SED) 's|/opt/vc/include|$(STAGING_DIR)/usr/include|g' $(@D)/CMakeLists.txt 
+#        $(SED) 's|/opt/vc/lib|$(STAGING_DIR)/usr/lib|g' $(@D)/CMakeLists.txt 
+#        $(SED) 's|bcm_host|bcm_host vchostif|g' $(@D)/CMakeLists.txt 
+#endef
+
+#RPI_FBCP_PRE_CONFIGURE_HOOKS += RPI_FBCP_CROSS_FIXUP
+
+#define ADVANCEMAME_INSTALL_TARGET_CMDS 
+#	$(INSTALL) -m 0755 -D $(@D)/fbcp $(TARGET_DIR)/usr/bin 
+#endef 
+
+#cmake
+#$(eval $(cmake-package))
+#autotools
+$(eval $(autotools-package))

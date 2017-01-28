@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RPI_FBCP
+    bool "rpi-fbcp"
+    help
+		Raspberry Pi utility. Used for mirror primary framebuffer to secondary framebuffer.
+
+		https://github.com/tasanakorn/rpi-fbcp
