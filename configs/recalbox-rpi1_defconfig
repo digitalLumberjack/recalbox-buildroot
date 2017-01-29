@@ -21,6 +21,7 @@ BR2_ENABLE_LOCALE_WHITELIST="C ar ca de el es eu_ES fr it ko nb_NO nl no pl pt s
 BR2_GENERATE_LOCALE="en_US.UTF-8 ar_YE.UTF-8 ca_ES.UTF-8 de_DE.UTF-8 el_GR.UTF-8 es_ES.UTF-8 eu_ES.UTF-8 fr_FR.UTF-8 it_IT.UTF-8 ko_KR.UTF-8 nb_NO.UTF-8 nn_NO.UTF-8 nl_NL.UTF-8 pl_PL.UTF-8 pt_BR.UTF-8 sv_SE.UTF-8 tr_TR.UTF-8 zh_CN.UTF-8 zh_TW.UTF-8"
 BR2_TARGET_TZ_INFO=y
 BR2_TARGET_LOCALTIME="Europe/Paris"
+BR2_ROOTFS_USERS_TABLES="board/recalbox/user-table.txt"
 BR2_ROOTFS_OVERLAY="board/recalbox/fsoverlay board/recalbox/rpi/fsoverlay"
 BR2_ROOTFS_POST_BUILD_SCRIPT="board/recalbox/recalbox-patch-target.sh"
 BR2_ROOTFS_POST_IMAGE_SCRIPT="board/recalbox/copy-recalbox-archives.sh"
