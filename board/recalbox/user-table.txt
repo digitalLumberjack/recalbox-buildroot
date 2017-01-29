@@ -1,0 +1,1 @@
+kodi 499 kodi 499 !=kodipassword /recalbox/share/system/ /bin/sh tty,video,audio,input Kodi user

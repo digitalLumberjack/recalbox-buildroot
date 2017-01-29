@@ -1,0 +1,1 @@
+KERNEL=="hiddev*",GROUP="input",MODE="0660"
