@@ -101,6 +101,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added Japanese, Russian and Hungarian languages
 - Bumped virtualgamepads version - virtualkeyboard now available
 - Add usb encoder 3H-Dual-Arcade, Mayflash dreamcast adapter
+- Add support for smb and upnp protocols in Kodi
 
 
 ## [4.0.0-beta5] - 2016-08-13hs the ratio issue in mame.
