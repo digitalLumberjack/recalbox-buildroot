@@ -26,7 +26,24 @@ do_start ()
         omx_fnt=""
         omx_opt="--no-keys --layer=10000 --aspect-mode=fill"
         omx_srt="--no-ghost-box --lines=1 --align=left $omx_fnt --font-size=20 --subtitles=/recalbox/system/resources/splash/recalboxintro.srt"
-        /usr/bin/omxplayer.bin $omx_opt $omx_srt $video &
+        	
+	# Use the sound settings from the configuration file
+	audiovolume=`grep audio.volume= /recalbox/share/system/recalbox.conf | cut -d "=" -f 2` 
+	audiodevice=`grep audio.device= /recalbox/share/system/recalbox.conf | cut -d "=" -f 2` 
+
+        if [ "$audiodevice" == "jack" ]; then
+		omx_opt=$omx_opt" --adev local"
+	fi
+
+        if [ "$audiodevice" == "hdmi" ]; then
+		omx_opt=$omx_opt" --adev hdmi"
+	fi
+
+        if [ ! -z $audiovolume ]; then
+		omx_opt=$omx_opt" --vol $audiovolume"
+	fi
+
+	/usr/bin/omxplayer.bin $omx_opt $omx_srt $video &
         PID=$!
 
         # Stop the video when ready
