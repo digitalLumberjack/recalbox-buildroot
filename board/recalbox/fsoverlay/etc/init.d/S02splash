@@ -28,8 +28,8 @@ do_start ()
         omx_srt="--no-ghost-box --lines=1 --align=left $omx_fnt --font-size=20 --subtitles=/recalbox/system/resources/splash/recalboxintro.srt"
         	
 	# Use the sound settings from the configuration file
-	audiovolume=`grep audio.volume= /recalbox/share/system/recalbox.conf | cut -d "=" -f 2` 
-	audiodevice=`grep audio.device= /recalbox/share/system/recalbox.conf | cut -d "=" -f 2` 
+	audiovolume=`grep audio.volume= /boot/recalbox-boot.conf | cut -d "=" -f 2` 
+	audiodevice=`grep audio.device= /boot/recalbox-boot.conf | cut -d "=" -f 2` 
 
         if [ "$audiodevice" == "jack" ]; then
 		omx_opt=$omx_opt" --adev local"
