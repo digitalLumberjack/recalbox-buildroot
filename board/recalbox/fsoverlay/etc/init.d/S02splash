@@ -26,7 +26,24 @@ do_start ()
         omx_fnt=""
         omx_opt="--no-keys --layer=10000 --aspect-mode=fill"
         omx_srt="--no-ghost-box --lines=1 --align=left $omx_fnt --font-size=20 --subtitles=/recalbox/system/resources/splash/recalboxintro.srt"
-        /usr/bin/omxplayer.bin $omx_opt $omx_srt $video &
+        	
+	# Use the sound settings from the configuration file
+	audiovolume=`grep audio.volume= /boot/recalbox-boot.conf | cut -d "=" -f 2` 
+	audiodevice=`grep audio.device= /boot/recalbox-boot.conf | cut -d "=" -f 2` 
+
+        if [ "$audiodevice" == "jack" ]; then
+		omx_opt=$omx_opt" --adev local"
+	fi
+
+        if [ "$audiodevice" == "hdmi" ]; then
+		omx_opt=$omx_opt" --adev hdmi"
+	fi
+
+        if [ ! -z $audiovolume ]; then
+		omx_opt=$omx_opt" --vol $audiovolume"
+	fi
+
+	/usr/bin/omxplayer.bin $omx_opt $omx_srt $video &
         PID=$!
 
         # Stop the video when ready
@@ -62,14 +79,47 @@ do_start ()
     test -e /dev/fb0 && fbv -f -i /recalbox/system/resources/splash/logo-version.png
 }
 
+do_stop ()
+{
+
+systemsetting="python /usr/lib/python2.7/site-packages/configgen/settings/recalboxSettings.pyc"
+
+CONFIG=/boot/recalbox-boot.conf
+
+function set_config(){
+
+    oldvalue=`grep $1= $CONFIG | cut -d "=" -f 2`
+    if [ -z $oldvalue ]; then
+        echo $1=$2 >> $CONFIG
+    else
+        cat $CONFIG | sed "s/^\($1\s*=\s*\).*\$/\1$2/" >$CONFIG.new
+        cp $CONFIG.new $CONFIG
+        rm $CONFIG.new
+    fi
+}
+
+audiovolume="`$systemsetting  -command load -key audio.volume`"
+audiodevice="`$systemsetting  -command load -key audio.volume`"
+
+if [ ! -z $audiovolume ]; then
+    set_config audio.volume ${audiovolume}
+fi
+
+if [ ! -z $audiodevice ]; then
+    set_config audio.device ${audiodevice}
+fi
+
+}
+
 case "$1" in
     start)
         do_start &
         ;;
     stop)
-	   ;;
+    	do_stop &
+	;;
     restart|reload)
-	   ;;
+	;;
     *)
 esac
 

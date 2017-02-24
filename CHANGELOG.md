@@ -105,6 +105,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Bumped virtualgamepads version - virtualkeyboard now available
 - Add usb encoder 3H-Dual-Arcade, Mayflash dreamcast adapter
 - Add support for smb and upnp protocols in Kodi
+- Use the sound settings from the configuration file for the splash screen at boot
 
 
 ## [4.0.0-beta5] - 2016-08-13hs the ratio issue in mame.
