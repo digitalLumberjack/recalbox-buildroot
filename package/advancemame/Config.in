@@ -1,5 +1,6 @@
 config BR2_PACKAGE_ADVANCEMAME
 	bool "advancemame"
+	select BR2_PACKAGE_RECALBOX_ROMFS_MAME
 	help
 	  A MAME 0.106-based emulator
 	  http://www.advancemame.it

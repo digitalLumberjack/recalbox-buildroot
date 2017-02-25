@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_PRBOOM
+	bool "recalbox-romfs-prboom"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_PRBOOM
+	help
+	  share_init/roms and xml for prboom

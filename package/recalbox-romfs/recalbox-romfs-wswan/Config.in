@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_WSWAN
+	bool "recalbox-romfs-wswan"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_BEETLE_WSWAN
+	help
+	  share_init/roms and xml for wswan

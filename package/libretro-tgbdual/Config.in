@@ -2,6 +2,8 @@ config BR2_PACKAGE_LIBRETRO_TGBDUAL
         bool "libretro-tgbdual"
 	depends on BR2_PACKAGE_RETROARCH
 	depends on BR2_INSTALL_LIBSTDCPP
+	select BR2_PACKAGE_RECALBOX_ROMFS_GB
+	select BR2_PACKAGE_RECALBOX_ROMFS_GBC
         help
           A libretro GB/C emulator core for ARM.
 

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_AMSTRADCPC
+	bool "recalbox-romfs-amstradcpc"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_CAP32
+	help
+	  share_init/roms and xml for amstradcpc

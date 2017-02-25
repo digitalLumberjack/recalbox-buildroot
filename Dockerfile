@@ -10,7 +10,7 @@ ENV RECALBOX_CCACHE_DIR ''
 # needed ? xterm
 RUN apt-get update -y && \
 apt-get -y install build-essential git libncurses5-dev qt5-default qttools5-dev-tools \
-mercurial libdbus-glib-1-dev texinfo zip openssh-client \
+mercurial libdbus-glib-1-dev texinfo zip openssh-client libxml2-utils \
 software-properties-common wget cpio bc locales rsync imagemagick \
 nano vim automake mtools dosfstools subversion openjdk-8-jdk libssl-dev && \
 rm -rf /var/lib/apt/lists/*

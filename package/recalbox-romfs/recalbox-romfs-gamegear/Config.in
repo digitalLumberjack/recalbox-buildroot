@@ -1,0 +1,7 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_GAMEGEAR
+	bool "recalbox-romfs-gamegear"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_GENESISPLUSGX \
+	  || BR2_PACKAGE_LIBRETRO_PICODRIVE
+	help
+	  share_init/roms and xml for gamegear

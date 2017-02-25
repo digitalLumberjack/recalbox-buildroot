@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_IMAGEVIEWER
+	bool "recalbox-romfs-imageviewer"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_RETROARCH
+	help
+	  share_init/roms and xml for imageviewer

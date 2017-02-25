@@ -2,6 +2,8 @@ config BR2_PACKAGE_LIBRETRO_FCEUMM
         bool "libretro-fceumm"
 	depends on BR2_PACKAGE_RETROARCH
 	depends on BR2_INSTALL_LIBSTDCPP
+	select BR2_PACKAGE_RECALBOX_ROMFS_FDS
+	select BR2_PACKAGE_RECALBOX_ROMFS_NES
         help
           A libretro NES emulator core for ARM.
 

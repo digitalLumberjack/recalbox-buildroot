@@ -1,0 +1,7 @@
+config BR2_PACKAGE_RECALBOX_ROMFS_GB
+	bool "recalbox-romfs-gb"
+	select BR2_PACKAGE_RECALBOX_ROMS
+	depends on BR2_PACKAGE_LIBRETRO_GAMBATTE \
+	  || BR2_PACKAGE_LIBRETRO_TGBDUAL
+	help
+	  share_init/roms and xml for gb
