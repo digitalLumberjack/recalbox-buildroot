@@ -1,0 +1,5 @@
+config BR2_PACKAGE_TFT_WAVESHARE
+	bool "tft-waveshare"
+	depends on BR2_PACKAGE_RPI_FIRMWARE
+	help
+	  DTBO files to give support of 3.2 and 3.5 TFT Waveshare Screen

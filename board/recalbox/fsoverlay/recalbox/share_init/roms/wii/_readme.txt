@@ -2,4 +2,4 @@
 
 Put your Wii roms in this directory.
 
-Rom files must have a ".iso" extension.
+Rom files must have an ".iso" or ".wbfs" extension.

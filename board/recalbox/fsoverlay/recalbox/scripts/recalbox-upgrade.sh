@@ -1,12 +1,11 @@
 #!/bin/bash
-recalboxupdateurl="http://archive.recalbox.com"
+recalboxupdateurl="http://archive.recalbox.com/updates/v1.0"
 systemsetting="python /usr/lib/python2.7/site-packages/configgen/settings/recalboxSettings.pyc"
 
 arch=$(cat /recalbox/recalbox.arch)
-majorversion=$(cat /recalbox/recalbox.updateversion)
 updatetype="`$systemsetting  -command load -key updates.type`"
 
-if test "${updatetype}" != "stable" -a "${updatetype}" != "unstable" -a "${updatetype}" != "beta"
+if "${updatetype}" = "beta"
 then
     # force a default value in case the value is removed or miswritten
     updatetype="stable"
@@ -24,7 +23,7 @@ fi
 files="root.tar.xz boot.tar.xz"
 size="0"
 for file in $files; do
-  url="${recalboxupdateurl}/${majorversion}/${arch}/${updatetype}/last/${file}"
+  url="${recalboxupdateurl}/${updatetype}/${arch}/${file}"
   headers=`curl -sfI ${url}`
   if [ $? -ne 0 ];then
     recallog -e "Unable to get headers for ${url}"
@@ -63,9 +62,10 @@ function cleanBeforeExit {
   rm -rf /recalbox/share/system/upgrade/*
   exit $1
 }
-files="boot.tar.xz root.tar.xz"
+
+files="boot.tar.xz root.tar.xz boot.tar.xz.sha1 root.tar.xz.sha1 root.list"
 for file in $files; do
-  url="${recalboxupdateurl}/${majorversion}/${arch}/${updatetype}/last/${file}"
+  url="${recalboxupdateurl}/${updatetype}/${arch}/${file}"
   if ! curl -fs "${url}" -o "/recalbox/share/system/upgrade/${file}";then
     recallog -e "Unable to download file ${url}"
     cleanBeforeExit 7
@@ -73,5 +73,16 @@ for file in $files; do
   recallog "${url} downloaded"
 done
 
-recallog -e "All files downloaded, ready for upgrade on next reboot"
+# Verify checksums
+filesToCheck="boot.tar.xz root.tar.xz"
+for file in $filesToCheck; do
+  computedSum=`sha1sum /recalbox/share/system/upgrade/${file} | cut -d ' ' -f 1`
+  buildSum=`cat /recalbox/share/system/upgrade/${file}.sha1 | cut -d ' ' -f 1`
+  if [[ $computedSum != $buildSum ]]; then
+    recallog -e "Checksums differ for ${file}. Aborting upgrade !"
+    cleanBeforeExit 8
+  fi
+done
+
+recallog -e "All files downloaded and checked, ready for upgrade on next reboot"
 exit 0

@@ -1,0 +1,22 @@
+#!/bin/sh
+ 
+case "$1" in
+        start)
+                printf "Starting fbcp ... "
+                start-stop-daemon -S -q -m -b -p /var/run/fbcp.pid --exec /usr/bin/fbcp -- -n
+                echo "done."
+                ;;
+        stop)
+                printf "Stopping fbcp ..."
+                start-stop-daemon -K -q -p /var/run/fbcp.pid
+                echo "done."
+                ;;
+        restart)
+                $0 stop
+                sleep 1
+                $0 start
+                ;;
+        *)
+                echo "usage: $0 {start|stop|restart}"
+                ;;
+esac

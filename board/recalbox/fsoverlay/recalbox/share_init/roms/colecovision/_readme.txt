@@ -4,10 +4,6 @@ Put your colecovision roms in this directory.
 
 Rom files must have a ".col" extension.
 
-You can download colecovision roms on planetemu :
-http://www.planetemu.net/machine/colecovision
-
-
 ## BIOS ##
 
 - BlueMSX :

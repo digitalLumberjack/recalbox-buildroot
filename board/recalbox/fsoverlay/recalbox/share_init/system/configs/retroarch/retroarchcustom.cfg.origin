@@ -6,6 +6,8 @@ config_save_on_exit = false
 
 video_threaded = true
 
+menu_driver = rgui
+
 #aspect_ratio_index = "21"
 video_aspect_ratio_auto = true
 
@@ -28,6 +30,7 @@ savefile_directory = /recalbox/share/saves/
 extraction_directory = /recalbox/share/extractions/
 cheat_database_path = /recalbox/share_init/cheats/cht/
 cheat_settings_path = /recalbox/share/cheats/saves/
+video_font_path = /recalbox/share_init/system/.emulationstation/themes/recalbox/data/ubuntu_condensed.ttf
 
 fastforward_ratio = -1.0
 input_autodetect_enable = false
@@ -45,3 +48,5 @@ input_enable_hotkey_btn = "16"
 
 input_enable_hotkey = "escape"
 input_exit_emulator = "escape"
+
+menu_swap_ok_cancel_buttons = "true"

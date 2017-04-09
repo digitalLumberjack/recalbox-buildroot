@@ -20,12 +20,11 @@ case "$1" in
     fi
     
     echo "Starting virtual-gamepads server"
-    cd /usr/node-virtual-gamepads/ 
-    node main.js &
+    cd /usr/node-virtual-gamepads/ && PORT=8080 node virtualgamepads.js &
     ;;
   stop)
     echo -n "Stoping virtual-gamepads server"
-    ps -ef | grep node | grep -v grep | awk '{print $1}' | xargs kill
+    ps -ef | grep node | grep virtualgamepads | grep -v grep | awk '{print $1}' | xargs kill
     ;;
   restart|reload)
     $0 stop

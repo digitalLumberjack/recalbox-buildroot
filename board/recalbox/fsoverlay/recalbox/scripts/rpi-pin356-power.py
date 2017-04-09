@@ -2,6 +2,13 @@ import RPi.GPIO as GPIO
 import time
 import os
 import thread
+import argparse
+
+parser = argparse.ArgumentParser(description='power manager')
+parser.add_argument("-m", help="mode onoff or push", type=str, required=True)
+args = parser.parse_args()
+
+mode = args.m
 
 POWERPLUS = 3
 RESETPLUS = 2
@@ -60,6 +67,13 @@ def blink(speed):
 			time.sleep(speed)
 
 GPIO.add_event_detect(RESETPLUS, GPIO.FALLING, callback=button_pressed)
-GPIO.add_event_detect(POWERPLUS, GPIO.RISING, callback=button_pressed)
+try:
+	if mode == "onoff" :
+		GPIO.add_event_detect(POWERPLUS, GPIO.RISING, callback=button_pressed)
+	elif mode == "push":
+		GPIO.add_event_detect(POWERPLUS, GPIO.FALLING, callback=button_pressed)
+	
+except KeyboardInterrupt:
+    print ""
 while True:
 	time.sleep(0.2)

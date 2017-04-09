@@ -211,7 +211,8 @@ wittyPi_stop()
 
 pin356_start()
 {
-	python /recalbox/scripts/rpi-pin356-power.py &
+	mode=$1
+	python /recalbox/scripts/rpi-pin356-power.py -m "$mode" &
     pid=$!
     echo "$pid" > /tmp/rpi-pin356-power.pid
     wait "$pid"
@@ -250,6 +251,8 @@ if [ -e $CONFFILE ]; then
     CONFVALUE=$(sed -rn "s/^$CONFPARAM=(\w*)\s*.*$/\1/p" $CONFFILE | tail -n 1)
 fi
 
+echo "$CONFVALUE"
+
 case "$CONFVALUE" in
     "ATX_RASPI_R2_6")
         atx_raspi_$1 7 8
@@ -275,6 +278,10 @@ case "$CONFVALUE" in
     ;;
     "PIN356ONOFFRESET")
         echo "will start pin356_$1"
-        pin356_$1 noparam
+        pin356_$1 onoff
+    ;;
+	"PIN356PUSHRESET")
+        echo "will start pin356_$1"
+        pin356_$1 push
     ;;
 esac

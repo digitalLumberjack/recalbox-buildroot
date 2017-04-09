@@ -11,16 +11,38 @@ OPTS="runserver 0.0.0.0:80 --settings=project.settings_production --noreload"
 systemsetting="python /usr/lib/python2.7/site-packages/configgen/settings/recalboxSettings.pyc"
 
 do_start() {
-    start-stop-daemon --start --background --user $RUN_AS --pidfile $PIDFILE --make-pidfile --chuid $RUN_AS --startas $CMD -- $OPTS
+    version="`$systemsetting  -command load -key system.manager.version`"
+    recallog "... Starting manager v${version}"
+    case "$version" in
+    1)
+        start-stop-daemon --start --background --user $RUN_AS --pidfile $PIDFILE --make-pidfile --chuid $RUN_AS --startas $CMD -- $OPTS
+        ;;
+    2)
+        cd /usr/recalbox-manager2/ && PORT=80 node recalbox-manager2.js &
+        ;;
+    esac
 }
 
 do_stop() {
-    start-stop-daemon --stop --pidfile $PIDFILE
+    version="`$systemsetting  -command load -key system.manager.version`"
+    case "$version" in
+    1)
+        start-stop-daemon --stop --pidfile $PIDFILE
+        ;;
+    2)
+        ps -ef | grep node | grep "recalbox-manager2.js" | grep -v grep | awk '{print $1}' | xargs kill
+        ;;
+    esac
 }
 
 
 case "$1" in
 start)
+    enabled="`$systemsetting  -command load -key system.security.enabled`"
+    if [ "$enabled" == "1" ];then
+        recallog "Will not start $NAME : system.security.enabled is set to 1"
+        exit 0
+    fi
     enabled="`$systemsetting  -command load -key system.manager.enabled`"
     if [ "$enabled" != "0" ];then
         recallog "Starting $NAME"
@@ -29,10 +51,7 @@ start)
         recallog "Will not start $NAME : system.manager.enabled is set to 0"
     fi
 
-    enabled="`$systemsetting  -command load -key system.security.enabled`"
-    if [ "$enabled" == "1" ];then
-	recallog "Will not start $NAME : system.security.enabled is set to 1"
-    fi
+    
     ;;
 stop)
     recallog "Stopping $NAME"

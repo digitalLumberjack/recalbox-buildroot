@@ -2,4 +2,4 @@
 
 Put your Dreamcast isos in this directory.
 
-Rom files must have a ".gdi/.cdi" extension.
+Rom files must have a .gdi, .cdi or .chd extension.

@@ -2,4 +2,4 @@
 
 Placez ici vos roms Wii.
 
-Les roms doivent avoir l'extension ".iso"
+Les roms doivent avoir l'extension ".iso" ou ".wbfs"

@@ -2,5 +2,4 @@
 
 Placez ici vos roms PSP.
 
-Les roms doivent avoir l'extension ".iso" ou ".img" ou ".bin" ou ".cue"
-
+Les roms doivent avoir l'extension ".cso", ".iso" ou ".pbp"

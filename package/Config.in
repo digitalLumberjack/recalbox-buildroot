@@ -191,9 +191,13 @@ menu "Recalbox"
 	source "package/recalbox-configgen/Config.in"
 	source "package/moonlight-embedded/Config.in"
 	source "package/recalbox-manager/Config.in"
+	source "package/recalbox-manager2/Config.in"
 	source "package/recalbox-api/Config.in"
 	source "package/recalbox-initramfs/Config.in"
 	source "package/recalbox-x86_64_efi/Config.in"
+	source "package/rgb-pi/Config.in"
+	source "package/tft-waveshare/Config.in"
+	source "package/pwm-audio-pi-zero/Config.in"
 menu "Emulationstation"
         source "package/recalbox-emulationstation2/Config.in"
         source "package/emulation-station/Config.in"
@@ -285,6 +289,7 @@ menu "Libretro Cores"
        source "package/libretro-hatari/Config.in"
        source "package/libretro-quicknes/Config.in"
        source "package/libretro-glupen64/Config.in"
+       source "package/libretro-snes9x/Config.in"
 endmenu
 endif
 menu "Doom packages"
@@ -315,6 +320,9 @@ menu "Utils"
         source "package/megatools/Config.in"
         source "package/jstest2/Config.in"
         source "package/libcapsimage/Config.in"
+endmenu
+menu "Small TFT Screen"
+        source "package/rpi-fbcp/Config.in"
 endmenu
 endmenu
 

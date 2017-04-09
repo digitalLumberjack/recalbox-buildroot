@@ -1,0 +1,122 @@
+image: docker:latest
+
+stages:
+  - build
+  - release
+  - clean
+
+.build_template: &build_definition
+  stage: build
+  script:
+    - export RECALBOX_VERSION=${CI_BUILD_TAG:-${CI_BUILD_REF_SLUG}-${ARCH}-build-${CI_BUILD_ID}}
+    - docker build -t recalbox-${ARCH} . 
+    - docker run --rm -v `pwd`:/work -v /recalbox-builds/dl:/share/dl -v /recalbox-builds/hosts/host-${ARCH}:/share/host -v /recalbox-builds/ccaches/ccache-${ARCH}:/share/ccache -e "ARCH=$ARCH" -e "RECALBOX_VERSION_LABEL=$RECALBOX_VERSION" -e "RECALBOX_CCACHE_DIR=/share/ccache" recalbox-${ARCH} >> build.log 2>&1
+    - tail -n 200 build.log
+    - mkdir -p dist/${ARCH}
+    - cp output/images/recalbox/* dist/${ARCH}
+    - rm -rf output/
+    - for file in `ls dist/${ARCH}/`;do sha1sum dist/${ARCH}/${file} > dist/${ARCH}/${file}.sha1; done
+    - tar tf dist/${ARCH}/root.tar.xz | sort > dist/${ARCH}/root.list
+    - echo "$RECALBOX_VERSION" >> dist/${ARCH}/recalbox.version
+  artifacts:
+    name: dist-${ARCH}-${CI_BUILD_ID}
+    when: always
+    paths:
+      - dist/${ARCH}
+      - build.log
+    expire_in: 2 mos
+
+build rpi1:
+  <<: *build_definition
+  variables:
+    ARCH: 'rpi1'
+build rpi2:
+  <<: *build_definition
+  variables:
+    ARCH: 'rpi2'
+build rpi3:
+  <<: *build_definition
+  variables:
+    ARCH: 'rpi3'
+build x86_64:
+  <<: *build_definition
+  variables:
+    ARCH: 'x86_64'
+build x86:
+  <<: *build_definition
+  variables:
+    ARCH: 'x86'
+build odroidc2:
+  <<: *build_definition
+  variables:
+    ARCH: 'odroidc2'
+build odroidxu4:
+  <<: *build_definition
+  variables:
+    ARCH: 'odroidxu4'
+
+.release_template: &release_definition
+  stage: release
+  script:
+    - echo "releasing on archive.recalbox.com/updates/v1.0/${RELEASE_DIR}/"
+    - echo "${RECALBOX_ARCHIVE_SSH_KEY}" > recalbox-archive-key && chmod 400 recalbox-archive-key
+    - test -n "$SKIP_IMAGES" && rm dist/*/*.img*
+    - env | grep "CI_\|GITLAB" > envfile
+    - cat deploy/index.html | docker run --rm --env-file envfile -i loicmahieu/alpine-envsubst > dist/index.html
+    - docker run --rm -v `pwd`:/share -w /share digitallumberjack/docker-sshd ssh -p 10022 -o StrictHostKeyChecking=no -i recalbox-archive-key $ARCHIVE_SERVER "mkdir -p /recalbox-archive/updates/v1.0/${RELEASE_DIR}"
+    - docker run --rm -v `pwd`:/share -w /share digitallumberjack/docker-sshd scp -r -P 10022 -o StrictHostKeyChecking=no -i recalbox-archive-key dist/* $ARCHIVE_SERVER:/recalbox-archive/updates/v1.0/${RELEASE_DIR}/
+
+release master:
+  <<: *release_definition
+  only:
+    - master
+  variables:
+    RELEASE_DIR: "unstable-gh"
+  environment:
+    name: staging
+    url: https://archive.recalbox.com/updates/v1.0/unstable/
+
+
+release stable:
+  <<: *release_definition
+  when: manual
+  only:
+    - tags
+  variables:
+    RELEASE_DIR: "stable-gh"
+  environment:
+    name: production
+    url: https://archive.recalbox.com/updates/v1.0/stable/
+
+
+release for test:
+  <<: *release_definition
+  only:
+    - branches
+    - tags
+  except:
+    - master
+  variables:
+    RELEASE_DIR: "gitlab-gh/${CI_BUILD_REF_SLUG}"
+    SKIP_IMAGES: "true"
+  environment:
+    name: review/${CI_BUILD_REF_SLUG}
+    on_stop: clean tests from archive
+    url: https://archive.recalbox.com/updates/v1.0/gitlab/${CI_BUILD_REF_SLUG}/
+
+clean tests from archive:
+  stage: clean
+  when: manual
+  dependencies: []
+  only:
+    - branches
+    - tags
+  except:
+    - master
+  script:
+    - echo "cleaning archive.recalbox.com/updates/v1.0/gitlab/${CI_BUILD_REF_SLUG}"
+    - echo "${RECALBOX_ARCHIVE_SSH_KEY}" > recalbox-archive-key && chmod 400 recalbox-archive-key
+    - docker run --rm -v `pwd`:/share -w /share digitallumberjack/docker-sshd ssh -p 10022 -o StrictHostKeyChecking=no -i recalbox-archive-key $ARCHIVE_SERVER "rm -rf /recalbox-archive/updates/v1.0/gitlab/${CI_BUILD_REF_SLUG}"
+  environment:
+    name: review/${CI_BUILD_REF_SLUG}
+    action: stop

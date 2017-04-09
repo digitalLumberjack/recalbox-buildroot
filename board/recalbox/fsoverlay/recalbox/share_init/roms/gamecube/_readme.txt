@@ -2,4 +2,4 @@
 
 Put your GameCube roms in this directory.
 
-Rom files must have a ".iso" extension.
+Rom files must have an ".iso", ".gc" or ".gcz" extension.

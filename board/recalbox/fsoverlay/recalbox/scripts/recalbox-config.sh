@@ -12,9 +12,7 @@ extra1="$3"
 extra2="$4"
 arch=`cat /recalbox/recalbox.arch`
 
-updateversion=$(cat /recalbox/recalbox.updateversion)
-
-recalboxupdateurl="http://archive.recalbox.com/${updateversion}"
+recalboxupdateurl="http://archive.recalbox.com/updates/v1.0"
 
 preBootConfig() {
     mount -o remount,rw /boot
@@ -271,13 +269,18 @@ fi
 
 if [ "$command" == "volume" ];then
 	if [ "$mode" != "" ];then
-        	echo "`logtime` : setting audio volume : $mode" >> $log
-
+		echo "`logtime` : setting audio volume : $mode" >> $log
+		
+		if ( amixer scontrols | grep -q 'Master' ); then
 		# on my pc, the master is turned off at boot
 		# i don't know what are the rules to set here.
-		amixer set Master unmute      || exit 1
-                amixer set Master -- ${mode}% || exit 1
-		amixer set PCM    -- ${mode}% || exit 1
+			amixer set Master unmute      || exit 1
+			amixer set Master -- ${mode}% || exit 1
+		fi
+		if ( amixer scontrols | grep -q 'PCM' ); then
+			amixer set PCM    -- ${mode}% || exit 1
+		fi
+		# Odroids have no sound controller. Too bad, exit 0 anyway
 		exit 0
 	fi
 	exit 12
@@ -306,12 +309,11 @@ fi
 
 if [ "$command" == "canupdate" ];then
 	updatetype="`$systemsetting  -command load -key updates.type`"
-	if test "${updatetype}" != "stable" -a "${updatetype}" != "unstable" -a "${updatetype}" != "beta"
+	if test "${updatetype}" = "beta"
 	then
-		# force a default value in case the value is removed or miswritten
 		updatetype="stable"
 	fi
-	available=`wget -qO- ${recalboxupdateurl}/${arch}/${updatetype}/last/recalbox.version`
+	available=`wget -qO- ${recalboxupdateurl}/${updatetype}/${arch}/recalbox.version`
 	if [[ "$?" != "0" ]];then
 		exit 2
 	fi

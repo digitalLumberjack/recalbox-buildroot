@@ -1,0 +1,5 @@
+config BR2_PACKAGE_PWM_AUDIO_PI_ZERO
+	bool "pwm-audio-pi-zero"
+	depends on BR2_PACKAGE_RPI_FIRMWARE
+	help
+	  pwm-audio-pi-zero overlay to get audio thanks to PWMs through GPIO Pins 18 and 13 on an Pi Zero equivalent to dtoverlay=pwm-2chan,pin=18,func=2,pin2=13,func2=4
