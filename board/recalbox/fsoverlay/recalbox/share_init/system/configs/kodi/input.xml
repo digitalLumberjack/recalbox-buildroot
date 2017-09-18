@@ -21,6 +21,7 @@
 <input scope="global" 	       name="joystick2down"  value="Down" />
 <input scope="global" 	       name="joystick2left"  value="Left" />
 <input scope="global" 	       name="joystick2right" value="Right" />
+<input scope="global" 	       name="hotkey"         value="Menu" />
 <input scope="FullscreenVideo" name="up"       	     value="ChapterOrBigStepForward" />
 <input scope="FullscreenVideo" name="down"     	     value="ChapterOrBigStepBack" />
 <input scope="FullscreenVideo" name="right"    	     value="StepForward" />
