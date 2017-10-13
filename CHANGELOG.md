@@ -106,6 +106,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add usb encoder 3H-Dual-Arcade, Mayflash dreamcast adapter
 - Add support for smb and upnp protocols in Kodi
 - Add usbhid quirk for AJ 2 USB 2.4G sans fil manettes (ShanWan Twin USB Joystick PS3)
+- Add usbhid quirk for [GamepadBlock](https://blog.petrockblock.com/gamepadblock/)
 
 ## [4.0.0-beta5] - 2016-08-13hs the ratio issue in mame.
 - Improved pads and gpio support for moonlight
