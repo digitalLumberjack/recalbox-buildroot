@@ -30,7 +30,7 @@ case "${ACTION}" in
 
     "encode")
 	PASSWORD=$(getPassword)
-	CODE=$(echo "${CODE}" | openssl enc -aes-128-cbc -a -salt -pass pass:"${PASSWORD}")
+	CODE=$(echo "${CODE}" | openssl enc -aes-128-cbc -A -a -salt -pass pass:"${PASSWORD}")
 	echo "enc:${CODE}"
     ;;
 esac
